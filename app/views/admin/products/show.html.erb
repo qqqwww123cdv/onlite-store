@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Product name:</strong>
+  <%= @admin_product.product_name %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= image_tag (@admin_product.image) if @admin_product.image.attached?%>
+
+</p>
+
+<p>
+  <strong>Vendor code:</strong>
+  <%= @admin_product.vendor_code %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @admin_product.price %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @admin_product.description %>
+</p>
+
+<%= link_to 'Edit', edit_admin_product_path(@admin_product) %> |
+<%= link_to 'Back', admin_products_path %>
