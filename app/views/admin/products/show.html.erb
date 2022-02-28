@@ -7,8 +7,11 @@
 
 <p>
   <strong>Image:</strong>
-  <%= image_tag (@admin_product.image) if @admin_product.image.attached?%>
-
+  <% if @admin_product.image.attached? == false %>
+    <td><%= image_tag("plh.png", class: "max_img_width") %></td>
+  <% else %>
+    <td><%= image_tag(@admin_product.image, class: "max_img_width")%></td>
+  <% end %>
 </p>
 
 <p>

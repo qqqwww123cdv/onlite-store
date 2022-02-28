@@ -12,8 +12,6 @@ class Admin::Product < ApplicationRecord
   def correct_image_type
     if image.attached? && !image.content_type.in?(%w(image/jpeg image/jpg image/png))
       errors.add(:image, 'must be a JPEG,JPG or PNG.')
-    elsif image.attached? == false
-      errors.add(:image, 'required.')
     end
   end
 end
