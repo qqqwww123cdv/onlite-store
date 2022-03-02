@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Sumato</title>
+    <title>Dipl</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -12,7 +12,12 @@
 
   <body>
     <p class="alert"><%= alert %></p>
-    <p class="notice"><%= notice %></p>
+    <% if user_signed_in? %>
+      <p> Hello <%= current_user.email%>, you are <%=current_user.role%></p>
+      <%= link_to "sign out", destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= link_to "sign in", new_user_session_path %>
+    <% end %> 
     <%= yield %>
   </body>
 </html>

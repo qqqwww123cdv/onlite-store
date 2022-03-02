@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_27_155807) do
+ActiveRecord::Schema.define(version: 2022_03_02_144529) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -40,16 +40,16 @@ ActiveRecord::Schema.define(version: 2022_02_27_155807) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "admin_products", force: :cascade do |t|
+  create_table "products", force: :cascade do |t|
     t.string "product_name"
     t.text "vendor_code"
     t.decimal "price"
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["price"], name: "index_admin_products_on_price"
-    t.index ["product_name"], name: "index_admin_products_on_product_name"
-    t.index ["vendor_code"], name: "index_admin_products_on_vendor_code"
+    t.index ["price"], name: "index_products_on_price"
+    t.index ["product_name"], name: "index_products_on_product_name"
+    t.index ["vendor_code"], name: "index_products_on_vendor_code"
   end
 
   create_table "users", force: :cascade do |t|
