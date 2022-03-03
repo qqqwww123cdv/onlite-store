@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  
+  has_many :order_items
   has_one_attached :image
   validate :correct_image_type
   validates :product_name, presence: true, length: {minimum: 2, maximum: 500}

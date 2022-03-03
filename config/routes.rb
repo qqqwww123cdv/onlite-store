@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
+  get 'cards/show'
   resources :shops, only:[:index, :show]
+  resources :order_items
+  resource :cards, only:[:show]
+
   devise_for :users
 
   scope '/admin' do
