@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
 
   get 'cards/show'
+  get "/admin", to: "admin/products#homepage"
   resources :shops, only:[:index, :show]
   resources :order_items
   resource :cards, only:[:show]
 
   devise_for :users
 
-  scope '/admin' do
+  namespace :admin do
     resources :products do
       collection do
         delete 'discontinue'

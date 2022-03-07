@@ -2,7 +2,7 @@
 
 <h1>Products</h1>
 
-<%= form_tag discontinue_products_path, method: :delete do %>
+<%= form_tag discontinue_admin_products_path, method: :delete do %>
   <table>
     <thead>
       <tr>
@@ -38,9 +38,9 @@
           <% end %>
 
           <% if current_user.admin? %>
-            <td><%= link_to 'Show', product %></td>
-            <td><%= link_to 'Edit', edit_product_path(product) %></td>
-            <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+            <td><%= link_to 'Show', admin_product_path(product) %></td>
+            <td><%= link_to 'Edit', edit_admin_product_path(product) %></td>
+            <td><%= link_to 'Destroy', admin_product_path(product), method: :delete, data: { confirm: 'Are you sure?' } %></td> 
           <% end %> 
         </tr>
       <% end %>
@@ -48,12 +48,12 @@
   </table>
 
   <%= submit_tag "Delete selected products", data: { confirm: 'Are you sure?' } %>
-  <%= link_to 'Delete all', delete_all_products_path, method: :get, data: { confirm: 'Are you sure?' } %>
+  <%= link_to 'Delete all', delete_all_admin_products_path, method: :get, data: { confirm: 'Are you sure?' } %>
 <% end %>
 
 <%= will_paginate @products %>
 
 <br>
 <% if current_user.admin? %>
-  <%= link_to 'New Product', new_product_path %>
-<% end %> 
+  <%= link_to 'New Product', new_admin_product_path %>
+<% end %>
