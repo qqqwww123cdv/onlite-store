@@ -1,3 +1,5 @@
+
+
 <% @order_items.each do |item| %>
   <h5><%= item.product.product_name %></h5>
   <h5><%= item.product.price %></h5>
@@ -25,3 +27,8 @@
   <%= link_to "Place an order",  new_checkout_path %>
 
 <% end %>
+
+
+<%= render 'form', checkout: @checkout %>
+
+<%= link_to 'Back', checkouts_path %>

@@ -1,0 +1,51 @@
+<%= form_with(model: checkout) do |form| %>
+  <% if checkout.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(checkout.errors.count, "error") %> prohibited this checkout from being saved:</h2>
+
+      <ul>
+        <% checkout.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pick_up %>
+    <%= form.text_field :pick_up %>
+  </div>
+
+
+
+    <%= form.radio_button :pick_up, true, :checked => true  %>
+    <%= form.label :pick_up, "Pick up order in store"  %>
+
+
+    <%= form.radio_button :pick_up, false%>
+    <%= form.label :pick_up, "have the order delivered", :value => "true" %>
+
+
+  <div class="field">
+    <%= form.number_field :user_id, id: :checkout_user_id, value: current_user.id, type: :hidden %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

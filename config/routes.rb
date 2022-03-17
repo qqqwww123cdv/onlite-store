@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :checkouts
   get 'cards/show'
   get "/admin", to: "admin/products#homepage"
   resources :shops, only:[:index, :show]

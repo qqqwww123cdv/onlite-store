@@ -4,5 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  enum role: %i[user admin]         
+  enum role: %i[user admin]  
+  has_many :checkouts
+       
 end

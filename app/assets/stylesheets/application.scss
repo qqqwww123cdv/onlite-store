@@ -4,3 +4,10 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import '@fortawesome/fontawesome-free/scss/regular';
 @import '@fortawesome/fontawesome-free/scss/brands';
 @import '@fortawesome/fontawesome-free/scss/v4-shims';
+
+.max_img_width{
+  max-width: 150px;
+}
+.max_order_img_width{
+  max-width: 90px;
+}
