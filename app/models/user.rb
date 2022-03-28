@@ -6,5 +6,6 @@ class User < ApplicationRecord
 
   enum role: %i[user admin]  
   has_many :checkouts
+  has_many :order_items
        
 end

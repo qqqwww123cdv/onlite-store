@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_17_191436) do
+ActiveRecord::Schema.define(version: 2022_03_28_122131) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2022_03_17_191436) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
+    t.integer "total_price"
     t.index ["email"], name: "index_checkouts_on_email"
     t.index ["name"], name: "index_checkouts_on_name"
     t.index ["user_id"], name: "index_checkouts_on_user_id"
@@ -61,8 +62,10 @@ ActiveRecord::Schema.define(version: 2022_03_17_191436) do
     t.decimal "unit_price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
     t.index ["order_id"], name: "index_order_items_on_order_id"
     t.index ["product_id"], name: "index_order_items_on_product_id"
+    t.index ["user_id"], name: "index_order_items_on_user_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -82,6 +85,13 @@ ActiveRecord::Schema.define(version: 2022_03_17_191436) do
     t.index ["price"], name: "index_products_on_price"
     t.index ["product_name"], name: "index_products_on_product_name"
     t.index ["vendor_code"], name: "index_products_on_vendor_code"
+  end
+
+  create_table "promocodes", force: :cascade do |t|
+    t.string "code"
+    t.integer "discount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|

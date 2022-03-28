@@ -1,5 +1,4 @@
 
-
 <% @order_items.each do |item| %>
   <h5><%= item.product.product_name %></h5>
   <h5><%= item.product.price %></h5>
@@ -10,25 +9,57 @@
   <% end %>
   <h5><%= item.product.vendor_code %></h5>
   <h5><%= item.product.description %></h5>
-
-  <%= form_for item, remote: true do |f| %>
-    <%= f.hidden_field :product_id, :value => item.product.id %>
-    <%= f.number_field :quantity, :value => item.quantity.to_i %>
-    <%= f.submit "Update Card "%>
-    <%= link_to "Remove Items", order_item_path(item), method: :delete, remote: true, data: { confirm: 'Are you sure?' } %>
-  <% end %>
   <h2>Subtotal: <%= item.total %></h2>
 <% end %>
 
-<% if current_order.order_items.size == 0 %> 
-  <h4>The cart is empty</h4>
-<% else %>
+
+
+<%= form_with model: @checkout do |form| %>
+  <% if @checkout.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@checkout.errors.count, "error") %> prohibited this checkout from being saved:</h2>
+
+      <ul>
+        <% @checkout.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %> 
+
   <h1>Card subtotal: <%= current_order.subtotal %></h1>
-  <%= link_to "Place an order",  new_checkout_path %>
 
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+  </div>
+
+  <%= form.radio_button :pick_up, true, :checked => true  %>
+  <%= form.label :pick_up, "Pick up order in store"  %>
+
+  <%= form.radio_button :pick_up, false%>
+  <%= form.label :pick_up, "have the order delivered", :value => "true" %>
+
+  <div class="field">
+    <%= form.text_field :total_price, value: (current_order.subtotal), type: :hidden %>
+  </div>
+
+  <div class="field">
+    <%= form.number_field :user_id, id: :checkout_user_id, value: current_user.id, type: :hidden %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
 <% end %>
-
-
-<%= render 'form', checkout: @checkout %>
-
 <%= link_to 'Back', checkouts_path %>

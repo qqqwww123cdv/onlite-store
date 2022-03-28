@@ -5,10 +5,13 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Number of order</th>
       <th>Email</th>
+      <th>Name</th>
       <th>Address</th>
+      <th>Total price</th>
       <th>Pick up</th>
+      <th>User id</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,10 +19,13 @@
   <tbody>
     <% @checkouts.each do |checkout| %>
       <tr>
-        <td><%= checkout.name %></td>
+        <td><%= checkout.id %></td>
         <td><%= checkout.email %></td>
+        <td><%= checkout.name %></td>
         <td><%= checkout.address %></td>
+        <td><%= checkout.total_price %></td>
         <td><%= checkout.pick_up %></td>
+        <td><%= checkout.user_id %></td>
         <td><%= link_to 'Show', checkout %></td>
         <td><%= link_to 'Edit', edit_checkout_path(checkout) %></td>
         <td><%= link_to 'Destroy', checkout, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -31,3 +37,5 @@
 <br>
 
 <%= link_to 'New Checkout', new_checkout_path %>
+
+<%= will_paginate @checkouts %>

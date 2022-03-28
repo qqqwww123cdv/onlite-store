@@ -20,5 +20,23 @@
   <%= @checkout.pick_up %>
 </p>
 
+<p>
+  <strong>Total price:</strong>
+  <%= @checkout.total_price %>
+</p>
+
+<% @order_items.each do |item| %>
+  <h5><%= item.product.product_name %></h5>
+  <h5><%= item.product.price %></h5>
+  <% if item.product.image.attached? == false %>
+    <%= image_tag("plh.png", class: "max_img_width") %>
+  <% else %>
+    <%= image_tag(item.product.image, class: "max_img_width")%>
+  <% end %>
+  <h5><%= item.product.vendor_code %></h5>
+  <h5><%= item.product.description %></h5>
+  <h2>Subtotal: <%= item.total %></h2>
+<% end %>
+
 <%= link_to 'Edit', edit_checkout_path(@checkout) %> |
 <%= link_to 'Back', checkouts_path %>
