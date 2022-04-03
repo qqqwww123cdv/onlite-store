@@ -1,0 +1,28 @@
+<table>
+  <thead>
+    <tr>
+      <th>User Id</th>
+      <th>Email</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user.each do |u| %>
+      <tr>
+        <td><%= u.id %></td>
+        <td><%= u.email %></td>
+        <td><%= u.role %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= link_to 'Products', admin_products_path %>
+<%= link_to 'Checkouts', checkouts_path %>
+<%= link_to 'Promocodes', admin_promocodes_path %>
+
+
+
+

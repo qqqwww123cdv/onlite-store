@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Number of order:</strong>
+  <%= @checkout.id %>
+</p>
+
+<p>
   <strong>Name:</strong>
   <%= @checkout.name %>
 </p>
@@ -10,10 +15,12 @@
   <%= @checkout.email %>
 </p>
 
-<p>
-  <strong>Address:</strong>
-  <%= @checkout.address %>
-</p>
+<% if @checkout.pick_up == true %>
+  <p>
+    <strong>Address:</strong>
+    <%= @checkout.address %>
+  </p>
+<% end %>
 
 <p>
   <strong>Pick up:</strong>
@@ -22,21 +29,62 @@
 
 <p>
   <strong>Total price:</strong>
-  <%= @checkout.total_price %>
+  <%= @checkout.total_price %>$
 </p>
 
+
 <% @order_items.each do |item| %>
-  <h5><%= item.product.product_name %></h5>
-  <h5><%= item.product.price %></h5>
+  <p>
+    <strong>Product name:</strong>
+    <%= item.product.product_name %>
+  </p>
+
   <% if item.product.image.attached? == false %>
     <%= image_tag("plh.png", class: "max_img_width") %>
   <% else %>
     <%= image_tag(item.product.image, class: "max_img_width")%>
   <% end %>
-  <h5><%= item.product.vendor_code %></h5>
-  <h5><%= item.product.description %></h5>
-  <h2>Subtotal: <%= item.total %></h2>
+
+  <p>
+    <strong>Vendor code:</strong>
+    <%= item.product.vendor_code %>
+  </p>
+
+  <p>
+    <strong>Quantity:</strong>
+    <%= item.quantity %>
+  </p>
+
+  <p>
+    <strong>Total price per 1 product:</strong>
+    <%= item.product.price %>$
+  </p>
+
+  <p>
+    <strong>Subtotal:</strong>
+    <%= item.total %>$
+  </p>
+  <br>
+
 <% end %>
 
-<%= link_to 'Edit', edit_checkout_path(@checkout) %> |
-<%= link_to 'Back', checkouts_path %>
+<h3>Card total: <%= @order_item.subtotal %>$</h3>
+
+<% if @order_item.total_price == 0 %>
+  <h2>Discount price: <%= @order_item.subtotal %>$</h2>
+<% else %>
+  <h2>Discount price: <%= @order_item.total_price %>$</h2>
+<% end %>
+
+<% if current_user.user? %>
+  <%= link_to 'Home Page', root_path %>
+<% else %>
+  <%= link_to 'Home Page', admin_path %>
+<% end %>
+
+
+
+
+
+
+

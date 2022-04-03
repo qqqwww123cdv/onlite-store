@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_28_122131) do
+ActiveRecord::Schema.define(version: 2022_03_30_122909) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -68,11 +68,19 @@ ActiveRecord::Schema.define(version: 2022_03_28_122131) do
     t.index ["user_id"], name: "index_order_items_on_user_id"
   end
 
+  create_table "order_promocodes", id: false, force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "promocode_id", null: false
+    t.index "\"order\"", name: "index_order_promocode_on_order"
+    t.index "\"promocode\"", name: "index_order_promocode_on_promocode"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.decimal "subtotal"
     t.decimal "total"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "total_price", default: 0.0
   end
 
   create_table "products", force: :cascade do |t|

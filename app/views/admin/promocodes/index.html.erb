@@ -15,7 +15,7 @@
     <% @promocodes.each do |promocode| %>
       <tr>
         <td><%= promocode.code %></td>
-        <td><%= promocode.discount %></td>
+        <td><%= promocode.discount %>%</td>
         <td><%= link_to 'Show', admin_promocode_path(promocode) %></td>
         <td><%= link_to 'Edit', edit_admin_promocode_path(promocode) %></td>
         <td><%= link_to 'Destroy', admin_promocode_path(promocode), method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -27,3 +27,5 @@
 <br>
 
 <%= link_to 'New Promocode', new_admin_promocode_path %>
+<br>
+<%= link_to 'Back', root_path %>

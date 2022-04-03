@@ -66,10 +66,6 @@ class Admin::ProductsController < Admin::BaseController
     redirect_to admin_products_path
   end
 
-  def homepage
-    
-  end
-
   private
 
     def set_product

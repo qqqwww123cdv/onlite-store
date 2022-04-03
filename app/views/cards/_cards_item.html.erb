@@ -1,6 +1,6 @@
 <% @order_items.each do |item| %>
   <h5><%= item.product.product_name %></h5>
-  <h5><%= item.product.price %></h5>
+  <h5><%= item.product.price %>$</h5>
   <% if item.product.image.attached? == false %>
     <%= image_tag("plh.png", class: "max_img_width") %>
   <% else %>
@@ -15,13 +15,23 @@
     <%= f.submit "Update Card "%>
     <%= link_to "Remove Items", order_item_path(item), method: :delete, remote: true, data: { confirm: 'Are you sure?' } %>
   <% end %>
-  <h2>Subtotal: <%= item.total %></h2>
+  <h2>Subtotal: <%= item.total %>$</h2>
 <% end %>
 
-<% if current_order.order_items.size == 0 %> 
+<% if current_order.order_items.size == 0 %>
   <h4>The cart is empty</h4>
+  <%= link_to "Back",  root_path %>
+<% elsif current_order.total_price == 0%>
+  <h1>Card total: <%= current_order.subtotal %>$</h1>
 <% else %>
-  <h1>Card subtotal: <%= current_order.subtotal %></h1>
-  <%= link_to "Place an order",  new_checkout_path %>
-
+  <h1>Card total: <%= current_order.total_price %>$</h1>
 <% end %>
+
+<% if current_order.order_items.size > 0 %>
+  <%= form_with( method: :post,  url: prom_path) do %>
+    <%= text_field_tag :promocode %>
+    <%= submit_tag "Submit Promocode" %>
+    <%= link_to "Place an order",  new_checkout_path %>
+  <% end %>
+<% end %>
+

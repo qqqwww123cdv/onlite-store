@@ -56,4 +56,6 @@
 <br>
 <% if current_user.admin? %>
   <%= link_to 'New Product', new_admin_product_path %>
+  <br>
+  <%= link_to 'Back', root_path %>
 <% end %>
