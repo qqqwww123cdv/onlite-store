@@ -1,5 +1,6 @@
 class Admin::PromocodesController < Admin::BaseController
   before_action :set_promocode, only: %i[ show edit update destroy ]
+  before_action :auth, only: %i[ show edit update destroy ]
 
   def index
     @promocodes = Promocode.all
@@ -10,6 +11,7 @@ class Admin::PromocodesController < Admin::BaseController
 
   def new
     @promocode = Promocode.new
+    authorize @promocode
   end
 
   def edit
@@ -17,7 +19,8 @@ class Admin::PromocodesController < Admin::BaseController
 
   def create
     @promocode = Promocode.new(promocode_params)
-
+    authorize @promocode
+    
     respond_to do |format|
       if @promocode.save
         format.html { redirect_to admin_promocode_url(@promocode), notice: "Promocode was successfully created." }
@@ -51,6 +54,10 @@ class Admin::PromocodesController < Admin::BaseController
   end
 
   private
+
+    def auth
+      authorize @promocode
+    end
 
     def set_promocode
       @promocode = Promocode.find(params[:id])

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :checkouts
   get 'cards/show'
   get "/admin", to: "admin/homepage#index"
+  get "all_orders", to: "shops#orders"
   post 'prom' => 'cards#prom'
 
   resources :shops, only:[:index, :show]

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_30_122909) do
+ActiveRecord::Schema.define(version: 2022_04_03_125904) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -54,6 +54,17 @@ ActiveRecord::Schema.define(version: 2022_03_30_122909) do
     t.index ["user_id"], name: "index_checkouts_on_user_id"
   end
 
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
   create_table "order_items", force: :cascade do |t|
     t.integer "quantity"
     t.integer "product_id"
@@ -90,8 +101,10 @@ ActiveRecord::Schema.define(version: 2022_03_30_122909) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
     t.index ["price"], name: "index_products_on_price"
     t.index ["product_name"], name: "index_products_on_product_name"
+    t.index ["slug"], name: "index_products_on_slug", unique: true
     t.index ["vendor_code"], name: "index_products_on_vendor_code"
   end
 

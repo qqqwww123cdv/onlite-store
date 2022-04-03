@@ -10,6 +10,10 @@ class ShopsController < ApplicationController
   def show
     @order_item = current_order.order_items.new
 
-    @product = Product.find(params[:id])
+    @product = Product.friendly.find(params[:id])
+  end
+
+  def orders
+    @check = Checkout.where(user_id: current_user.id)
   end
 end

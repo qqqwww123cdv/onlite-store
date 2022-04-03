@@ -1,31 +1,33 @@
-<p id="notice"><%= notice %></p>
+<% if current_user.admin? %>
+ <p id="notice"><%= notice %></p>
 
-<h1>Promocodes</h1>
+ <h1>Promocodes</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Discount</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+ <table>
+   <thead>
+     <tr>
+       <th>Code</th>
+       <th>Discount</th>
+       <th colspan="3"></th>
+     </tr>
+   </thead>
 
-  <tbody>
-    <% @promocodes.each do |promocode| %>
-      <tr>
-        <td><%= promocode.code %></td>
-        <td><%= promocode.discount %>%</td>
-        <td><%= link_to 'Show', admin_promocode_path(promocode) %></td>
-        <td><%= link_to 'Edit', edit_admin_promocode_path(promocode) %></td>
-        <td><%= link_to 'Destroy', admin_promocode_path(promocode), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+   <tbody>
+     <% @promocodes.each do |promocode| %>
+       <tr>
+         <td><%= promocode.code %></td>
+         <td><%= promocode.discount %>%</td>
+         <td><%= link_to 'Show', admin_promocode_path(promocode) %></td>
+         <td><%= link_to 'Edit', edit_admin_promocode_path(promocode) %></td>
+         <td><%= link_to 'Destroy', admin_promocode_path(promocode), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+       </tr>
+     <% end %>
+   </tbody>
+ </table>
 
-<br>
+ <br>
 
-<%= link_to 'New Promocode', new_admin_promocode_path %>
-<br>
-<%= link_to 'Back', root_path %>
+ <%= link_to 'New Promocode', new_admin_promocode_path %>
+ <br>
+ <%= link_to 'Back', root_path %>
+<% end %>

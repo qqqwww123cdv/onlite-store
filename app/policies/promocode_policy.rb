@@ -1,6 +1,10 @@
-class ProductPolicy < ApplicationPolicy
-  attr_reader :user, :product
+class PromocodePolicy < ApplicationPolicy
+  attr_reader :user, :promocode
 
+
+  def index?
+    user.admin?
+  end
   def new?
     user.admin?
   end
@@ -22,10 +26,6 @@ class ProductPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.admin?
-  end
-
-  def delete_all?
     user.admin?
   end
 end

@@ -1,4 +1,7 @@
 class Product < ApplicationRecord
+  extend FriendlyId
+  friendly_id :product_name, use: :slugged
+  
   has_many :order_items
   has_one_attached :image
   validate :correct_image_type

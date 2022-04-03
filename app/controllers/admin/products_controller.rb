@@ -1,12 +1,12 @@
 class Admin::ProductsController < Admin::BaseController
   before_action :set_product, only: %i[ show edit update destroy ]
+  before_action :auth, only: %i[ show edit update destroy delete_all]
 
   def index
     @products = Product.paginate(page: params[:page], per_page: 10)
   end
 
   def show
-    authorize @product
   end
 
   def new
@@ -15,7 +15,6 @@ class Admin::ProductsController < Admin::BaseController
   end
 
   def edit
-    authorize @product
   end
 
   def create
@@ -46,7 +45,6 @@ class Admin::ProductsController < Admin::BaseController
   end
 
   def destroy
-    authorize @product
     @product.destroy
     
     respond_to do |format|
@@ -66,10 +64,14 @@ class Admin::ProductsController < Admin::BaseController
     redirect_to admin_products_path
   end
 
+  def auth
+    authorize @product
+  end
+
   private
 
     def set_product
-      @product = Product.find(params[:id])
+      @product = Product.friendly.find(params[:id])
     end
 
     def product_params
