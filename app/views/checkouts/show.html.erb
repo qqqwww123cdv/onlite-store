@@ -1,3 +1,4 @@
+<div class="container">
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -27,60 +28,42 @@
   <%= @checkout.pick_up %>
 </p>
 
-<p>
-  <strong>Total price:</strong>
-  <%= @checkout.total_price %>$
-</p>
-
-
 <% @order_items.each do |item| %>
-  <p>
-    <strong>Product name:</strong>
-    <%= item.product.product_name %>
-  </p>
+<div class="card mb-5" style="max-width: 640px;">
+  <div class="row g-0">
+    <div class="col-md-5">
+      <% if item.product.image.attached? == false %>
+        <%= image_tag("plh.png", class: "img-fluid rounded-start dop") %>
+      <% else %>
+        <%= image_tag(item.product.image, class: "img-fluid rounded-start dop") %>
+      <% end %>
+    </div>
+    <div class="col-md-7">
+      <div class="card-body">
+        <h5 class="card-title"><%= item.product.product_name %></h5>
+        <p class="card-text">Code: <%= item.product.vendor_code %></p>
+        <p class="card-text">Total price per 1 product: <%= item.product.price %>$</p>
+        <p class="card-text">Quantity: <%= item.quantity %></p>
+        <h2>Subtotal: <%= item.total %>$</h2>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<% end %>
 
-  <% if item.product.image.attached? == false %>
-    <%= image_tag("plh.png", class: "max_img_width") %>
+  <% if current_order.total_price ==  0 %>
+    <h1>Total price: <%= current_order.subtotal %>$</h1>
   <% else %>
-    <%= image_tag(item.product.image, class: "max_img_width")%>
+    <h1>Total price: <%= current_order.total_price %>$</h1>
   <% end %>
 
-  <p>
-    <strong>Vendor code:</strong>
-    <%= item.product.vendor_code %>
-  </p>
-
-  <p>
-    <strong>Quantity:</strong>
-    <%= item.quantity %>
-  </p>
-
-  <p>
-    <strong>Total price per 1 product:</strong>
-    <%= item.product.price %>$
-  </p>
-
-  <p>
-    <strong>Subtotal:</strong>
-    <%= item.total %>$
-  </p>
-  <br>
-
-<% end %>
-
-<h3>Card total: <%= @order_item.subtotal %>$</h3>
-
-<% if @order_item.total_price == 0 %>
-  <h2>Discount price: <%= @order_item.subtotal %>$</h2>
-<% else %>
-  <h2>Discount price: <%= @order_item.total_price %>$</h2>
-<% end %>
-
 <% if current_user.user? %>
-  <%= link_to 'Home Page', root_path %>
+  <%= link_to "Back",  root_path, class: "btn btn-outline-danger mt-2" %>
 <% else %>
-  <%= link_to 'Home Page', admin_path %>
+  <%= link_to "Back",  admin_path, class: "btn btn-outline-danger mt-2" %>
 <% end %>
+</div>
 
 
 

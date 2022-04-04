@@ -9,7 +9,6 @@ class ShopsController < ApplicationController
 
   def show
     @order_item = current_order.order_items.new
-
     @product = Product.friendly.find(params[:id])
   end
 
