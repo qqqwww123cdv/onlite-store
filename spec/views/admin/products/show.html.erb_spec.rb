@@ -11,7 +11,7 @@ RSpec.describe "admin/products/show", type: :view do
     ))
   end
 
-  it "renders attributes in <p>" do
+  it "renders attributes" do
     render
     expect(rendered).to match(/Product Name/)
     expect(rendered).to match(//)
