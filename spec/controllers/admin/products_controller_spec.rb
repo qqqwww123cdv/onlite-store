@@ -3,29 +3,10 @@ require "rails_helper"
 
 RSpec.describe Admin::ProductsController, :type => :controller do
   let(:user) { FactoryBot.create(:user) }
-  let(:product) { FactoryBot.create(:product) }
-
- 
-  let(:valid_attributes) do
-    {
-      'product_name'=> 'anton',
-      'vendor_code' => '1234567',
-      'description' =>'1111111',
-      'price' => '12',
-    }
-  end
-  let(:invalid_attributes) do
-    {
-      'product_name'=> '',
-      'vendor_code' => '123457',
-      'description' =>'1111111',
-      'price' => '12',
-    }
-  end
 
   before do
     sign_in user
-    @product = Product.new(:id => "1", :product_name => "TV", :vendor_code => '1234567', :description => 'text', :price => 20)
+    @product = Product.create(:id => "1", :product_name => "TV", :vendor_code => '1234567', :description => 'text', :price => '20')
   end
 
   describe "index" do
@@ -43,7 +24,7 @@ RSpec.describe Admin::ProductsController, :type => :controller do
   
 
   describe "create" do
-    it 'successfully creates a new product' do
+    it 'successfully creates' do
       expect{
           post :create, params: { :product => { :id => "1", :product_name => "testuser", :vendor_code => "1234567", :description => "asdf", :price => "11" } }
         }.to change(Product,:count).by(1)
@@ -51,22 +32,36 @@ RSpec.describe Admin::ProductsController, :type => :controller do
   end
 
   describe "update" do
-    it 'successfully update product' do
-      patch :update, id: @product.id, product: { name: "xyz"}
-      expect(response).to be_redirect
+    it 'successfully update' do
+      form_params = {
+        product_name: "Big tv",
+        vendor_code: "1234567",
+        description: "text",
+        price: "20",
+      }
+      patch :update, params: { id:1, product: form_params }
+
+      expect(Product.find_by_product_name("Big tv")).to eq(@product)
     end
   end
 
 
-  describe "test" do
-    it "allows you to edit a reviewed scorecard" do
-
-    product = Product.new(:id => "1", :product_name => "TV", :vendor_code => '1234567', :description => 'text', :price => 20)
-
-    get 'edit', :id => product.id
-    response.status.should be(200)
+  describe "destroy" do
+    it 'successfully destroy' do
+      expect{
+      delete :destroy, params: { id:1 }
+      }.to change(Product,:count).by(-1)
     end
   end
+
+  describe "delete_all" do
+    it 'successfully destroy' do
+      expect{
+      Product.delete_all
+      }.to change(Product,:count).by(-1)
+    end
+  end
+
 
   describe "Product update" do
     it "update Product" do
