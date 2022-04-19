@@ -55,7 +55,7 @@ class Admin::ProductsController < Admin::BaseController
 
   def delete_all
     Product.delete_all
-    flash[:notice] = "You have removed all products!"
+    flash[:success] = "You have removed all products!"
     redirect_to admin_products_path
   end
 

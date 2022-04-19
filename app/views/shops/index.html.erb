@@ -1,47 +1,93 @@
-<div class="container">
-
-<p id="notice"><%= notice %></p>
-
-<% @products.each do |product| %>
-<div class="card mb-5" style="max-width: 640px;">
-  <div class="row g-0">
-    <div class="col-md-5">
-    <% if product.image.attached? == false %>
-      <%= link_to shop_path(product) do %> 
-        <%= image_tag("plh.png", class: "img-fluid rounded-start dop") %>
-      <% end %>
-    <% else %>
-      <%= link_to shop_path(product) do %>
-        <%= image_tag(product.image, class: "img-fluid rounded-start dop") %>
-      <% end %>
-    <% end %>
+<div class="banner">
+  <div class="container">
+    <div class="banner_main">
+      <h2 class="creative">Where dreams come true</h2>
+      <h1 class="welcome">WELCOME TO STORE</h1>
     </div>
-    <div class="col-md-7">
-      <div class="card-body">
-        <h5 class="card-title"><%= product.product_name %></h5>
-        <p class="card-text">code: <%= product.vendor_code %></p>
-        <h5 class="card-text"><%= product.price %>$</h5>
-        <td><%= link_to 'Show', shop_path(product) %></td>
-      </div>
-    </div>
-
-    
-     <% if user_signed_in? %>
-            <%= form_for @order_item, :html => {:class => "form-inline"},  remote: true do |f|%>
-            <div class="form-group mx-sm-3 mb-2">
-              <%= f.hidden_field :product_id, :value => product.id, class: "form-control" %>
-              <%= f.number_field :quantity, :value => 1, :min =>  1, class: "form-control ml-3"%>
-              <%= f.number_field :user_id, id: :order_item_user_id, value: current_user.id, type: :hidden %>
-              </div>
-              <%= f.submit "Add to Card ", class: "btn btn-primary mb-2"%>
-            <% end %>
-     
-        <% end %>
-   
   </div>
 </div>
 
-<% end %>
-
-<%= will_paginate @products %>
+<div class="container">
+  <div class="headline_main">
+    <div class="headline_sec">Why should you choose us?</div>
+  </div >
+  <div class="slider">
+    <div class="slider_dop onee">
+      <%= image_tag("del2.png", class: "slider_img") %>
+      <div class="slider_text">Fast delivery</div>
+    </div>
+    <div class="slider_dop">
+      <%= image_tag("pri.png", class: "slider_img") %>
+      <div class="slider_text">Lowest prices</div>
+    </div>
+    <div class="slider_dop one">
+      <%= image_tag("qwe.png", class: "slider_img") %>
+      <div class="slider_text">Quality assurance</div>
+    </div>
+  </div>
 </div>
+
+<div class="info">
+  <div class="inf_item">
+      <div class="numbers">62</div>
+      <div class="letters">Stores worldwide</div>
+  </div>
+  <div class="inf_item">
+      <div class="numbers">9k+</div>
+      <div class="letters">Happy client</div>
+  </div>
+  <div class="inf_item">
+      <div class="numbers">№1</div>
+      <div class="letters">In Belarus</div>
+  </div>
+  <div class="inf_item">
+      <div class="numbers">8</div>
+      <div class="letters">Store of the Year nominations</div>
+  </div>
+  <div class="inf_item">
+      <div class="numbers">24/7</div>
+      <div class="letters">Support</div>
+  </div>
+</div>
+
+
+<div class="container_product">
+  <div class="work">
+    <% @products.each do |product| %>
+      <div class="work_col">
+        <div class="card">
+          <% if product.image.attached? == false %>
+            <%= link_to shop_path(product) do %> 
+              <%= image_tag("plh.png", class: " max_img") %>
+            <% end %>
+          <% else %>
+            <%= link_to shop_path(product) do %>
+              <%= image_tag(product.image, class: " max_img") %>
+            <% end %>
+          <% end %>
+            
+          <div class="card-body">
+            <h5 class="card-title"><%= product.product_name %></h5>
+            <p class="card-text">code: <%= product.vendor_code %></p>
+            <h5 class="card-text"><%= product.price %>$</h5>
+            <td><%= link_to 'Show', shop_path(product) %></td>
+          </div>
+          
+          <% if user_signed_in? %>
+            <%= form_for @order_item, :html => {:class => "form-inline"},  remote: true do |f|%>
+              <div class="form-group mx-sm-3 mb-2">
+                <%= f.hidden_field :product_id, :value => product.id, class: "form-control" %>
+                <%= f.number_field :quantity, :value => 1, :min =>  1, class: "form-control "%>
+                <%= f.number_field :user_id, id: :order_item_user_id, value: current_user.id, type: :hidden %>
+              </div>
+              <%= f.submit "Add to Card ", class: "btn btn-primary mb-2 ml-3"%>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <%= will_paginate @products, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+</div>
+
+
+

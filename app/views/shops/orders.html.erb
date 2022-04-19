@@ -3,7 +3,7 @@
 <% else %>
   <h1>My checkouts</h1>
 
-  <table>
+  <table class="table">
     <thead>
       <tr>
         <th>Number of order</th>
@@ -32,7 +32,6 @@
           <td><%= checkout.pick_up %></td>
           <td><%= checkout.user_id %></td>
           <td><%= link_to 'Show', checkout %></td>
-          <td><%= link_to 'Edit', edit_checkout_path(checkout) %></td>
           <td><%= link_to 'Destroy', checkout, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>

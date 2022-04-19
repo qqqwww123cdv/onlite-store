@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Products</h1>
 
 <%= form_tag discontinue_admin_products_path, method: :delete do %>
@@ -51,7 +49,7 @@
   <%= link_to 'Delete all', delete_all_admin_products_path, method: :get, data: { confirm: 'Are you sure?' } %>
 <% end %>
 
-<%= will_paginate @products %>
+<%= will_paginate @products, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
 
 <br>
 <% if current_user.admin? %>

@@ -12,7 +12,7 @@ class CardsController < ApplicationController
     else
       current_order.applay_promocode(@promocode)
       redirect_to cards_show_path
-      flash[:alert] = "You used a promo code, discount is #{@promocode.discount}%"
+      flash[:success] = "You used a promo code, discount is #{@promocode.discount}%"
     end
   end 
 

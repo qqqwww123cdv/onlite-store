@@ -12,6 +12,7 @@ class OrderItemsController < ApplicationController
   def update
     @order_item = @order.order_items.find(params[:id])
     @order_item.update(order_params)
+    flash[:success] = "You successfully update the cart!"
     @order_items = current_order.order_items
     Order.last.update(total_price: 0)
 end

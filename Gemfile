@@ -24,6 +24,8 @@ gem 'devise'
 gem "pundit"
 gem 'select_all-rails'
 gem 'will_paginate', '~> 3.3'
+gem 'will_paginate-bootstrap'
+gem 'will_paginate-bootstrap4'
 gem 'friendly_id', '~> 5.4.0'
 gem 'rails-controller-testing'
 # Use Redis adapter to run Action Cable in production
