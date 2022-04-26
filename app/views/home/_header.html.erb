@@ -1,33 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-light" bg-light style="background-color: #efefef;">
-  <%= link_to 'Online Store', root_path, class: "navbar-brand" %></
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <%= link_to 'Online Store', root_path, class: "navbar-brand" %>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Account
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <% if user_signed_in? %>
-            <%= link_to "sign out", destroy_user_session_path, method: :delete, class:"dropdown-item" %>
-          <% else %>
-            <%= link_to "sign in", new_user_session_path, class:"dropdown-item" %>
-          <% end %>
-          <div class="dropdown-divider"></div>
-          <%= link_to "card", cards_path, class:"dropdown-item" %>
-          <div class="dropdown-divider"></div>
-          <% if user_signed_in? %>
-            <%= link_to 'My orders', all_orders_path, class: "btn btn-primary dropdown-item" %>
-          <% end %>
-        </div>
-      </li>
       <li class="nav-item">
         <%= link_to cards_path do%>
           <i class="fa-solid fa-cart-shopping fa-1x nav-link"></i>
         <% end %>
+      </li>
+        <%= link_to "Card", cards_path, class: "nav-link"%>
       </li>
       <li class="nav-item ">
         <% unless current_order.order_items.size == 0 %>
@@ -42,6 +23,7 @@
       <% end %>
       </li>
     </ul>
+
     <span class=" my-2 my-lg-0">      
       <% if user_signed_in? %>
       <%= link_to "sign out", destroy_user_session_path, method: :delete %>

@@ -21,6 +21,7 @@ class CheckoutsController < ApplicationController
   def create
     @checkout = Checkout.new(checkout_params)
     @order_items = current_order.order_items
+    session[:order_id] = nil
 
     respond_to do |format|
       if @checkout.save

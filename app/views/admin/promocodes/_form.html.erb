@@ -1,4 +1,4 @@
-<%= form_with(model: [:admin, promocode]) do |form| %>
+<%= form_with(model: [:admin, promocode], :html => {:class => "form-group"}) do |form| %>
   <% if promocode.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(promocode.errors.count, "error") %> prohibited this promocode from being saved:</h2>
@@ -11,14 +11,20 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field mb-3">
     <%= form.label :code %>
-    <%= form.text_field :code %>
+    <%= form.text_field :code, class: "form-control max" %>
+    <small class="text-muted">
+      Must be 1-4 characters long.
+    </small>
   </div>
 
-  <div class="field">
+  <div class="field mb-3">
     <%= form.label :discount %>
-    <%= form.number_field :discount %>
+    <%= form.number_field :discount, class: "form-control max" %>
+    <small class="text-muted">
+      Must be 1-100 characters long.
+    </small>
   </div>
 
   <div class="actions">

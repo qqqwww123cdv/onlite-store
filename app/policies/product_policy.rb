@@ -25,7 +25,4 @@ class ProductPolicy < ApplicationPolicy
     user.admin?
   end
 
-  def delete_all?
-    user.admin?
-  end
 end

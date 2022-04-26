@@ -17,22 +17,33 @@ RSpec.describe Admin::ProductsController, :type => :controller do
     end
   end
 
-  it "creates a Widget and redirects to the Widget's page" do
-    get :new
-    expect(response.status).to eq(200)
+  describe "new" do
+    it "has a 200 status code" do
+      get :new
+      expect(response.status).to eq(200)
+    end
+
+    it "add new Product" do
+      product = Product.new(:id => "2", :product_name => "Tb", :vendor_code => '1234566', :description => 'Text', :price => 20)
+      expect(product).to be_valid
+    end
   end
-  
 
   describe "create" do
-    it 'successfully creates' do
+    it 'successfully creates a new product' do
       expect{
           post :create, params: { :product => { :id => "1", :product_name => "testuser", :vendor_code => "1234567", :description => "asdf", :price => "11" } }
         }.to change(Product,:count).by(1)
     end
+
+    it 'product has not been create' do
+      post :create, params: { :product => { :id => "2", :product_name => "", :vendor_code => "", :description => "", :price => "" } }
+      expect(response).to render_template(:new)
+    end
   end
 
   describe "update" do
-    it 'successfully update' do
+    it 'successfully update product' do
       form_params = {
         product_name: "Big tv",
         vendor_code: "1234567",
@@ -43,39 +54,41 @@ RSpec.describe Admin::ProductsController, :type => :controller do
 
       expect(Product.find_by_product_name("Big tv")).to eq(@product)
     end
+
+    it 'product has not been updated' do
+      form_params = {
+        product_name: "",
+        vendor_code: "",
+        description: "",
+        price: "",
+      }
+      patch :update, params: { id:1, product: form_params }
+
+      expect(response).to render_template(:edit)
+    end
   end
 
-
-  describe "destroy" do
-    it 'successfully destroy' do
+  describe "destroy product" do
+    it 'successfully destroy product' do
       expect{
-      delete :destroy, params: { id:1 }
+        delete :destroy, params: { id:1 }
       }.to change(Product,:count).by(-1)
     end
   end
 
-  describe "delete_all" do
-    it 'successfully destroy' do
+  describe "destroy all products" do
+    it 'successfully destroy all products' do
+    expect{
+      get :delete_all
+      }.to change(Product,:count).by(-1) 
+     end
+  end
+
+  describe "delete selected products" do
+    it 'selected products have been successfully deleted' do
       expect{
-      Product.delete_all
+        delete :discontinue, params: { product_ids:1 }
       }.to change(Product,:count).by(-1)
-    end
+      end
   end
-
-
-  describe "Product update" do
-    it "update Product" do
-      @product.update(:product_name => "Big TV")
-      expect(Product.find_by_product_name("Big TV")).to eq(@product)
-    end
-  end
-
-  describe "GET new" do
-    it "add new Product" do
-      product = Product.new(:product_name => "Tb", :vendor_code => '1234566', :description => 'Text', :price => 20)
-      expect(product).to be_valid
-    end
-  end
-
-
 end

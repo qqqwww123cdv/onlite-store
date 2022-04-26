@@ -1,12 +1,13 @@
-<p>
-  <strong>Code:</strong>
-  <%= @promocode.code %>
-</p>
+<div class="container">
+  <div class="marl">
+    <ul class="list-group mb-3"style="max-width: 640px;">
+      <li class="list-group-item">Number of promocode: <%= @promocode.id %></li>
+      <li class="list-group-item">Code: <%= @promocode.code %></li>
+      <li class="list-group-item">Discount: <%= @promocode.discount %>%</li>
+    </ul>
+    <%= link_to 'Edit', edit_admin_promocode_path(@promocode), class: "btn btn-outline-primary mt-2 mb-3" %>
+    <%= link_to 'Back', admin_promocodes_path, class: "btn btn-outline-danger mt-2 mb-3" %>
+  </div>
+</div>
 
-<p>
-  <strong>Discount:</strong>
-  <%= @promocode.discount %>%
-</p>
 
-<%= link_to 'Edit', edit_admin_promocode_path(@promocode) %> |
-<%= link_to 'Back', admin_promocodes_path %>

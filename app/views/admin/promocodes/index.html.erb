@@ -1,7 +1,7 @@
 <% if current_user.admin? %>
- <h1>Promocodes</h1>
+<h1 class="text-center">Promocodes</h1>
 
- <table>
+ <table class="table">
    <thead>
      <tr>
        <th>Code</th>
@@ -15,9 +15,9 @@
        <tr>
          <td><%= promocode.code %></td>
          <td><%= promocode.discount %>%</td>
-         <td><%= link_to 'Show', admin_promocode_path(promocode) %></td>
-         <td><%= link_to 'Edit', edit_admin_promocode_path(promocode) %></td>
-         <td><%= link_to 'Destroy', admin_promocode_path(promocode), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+         <td><%= link_to 'Show', admin_promocode_path(promocode), class: "btn btn-outline-primary mt-2" %></td>
+         <td><%= link_to 'Edit', edit_admin_promocode_path(promocode), class: "btn btn-outline-primary mt-2" %></td>
+         <td><%= link_to 'Destroy', admin_promocode_path(promocode), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger mt-2" %></td>
        </tr>
      <% end %>
    </tbody>
@@ -25,7 +25,7 @@
 
  <br>
 
- <%= link_to 'New Promocode', new_admin_promocode_path %>
+ <%= link_to 'New Promocode', new_admin_promocode_path, class: "btn btn-primary" %>
  <br>
- <%= link_to 'Back', root_path %>
+ <%= link_to 'Back', root_path, class: "btn btn-outline-danger mt-2" %>
 <% end %>

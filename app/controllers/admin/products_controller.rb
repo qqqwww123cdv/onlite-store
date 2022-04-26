@@ -1,6 +1,6 @@
 class Admin::ProductsController < Admin::BaseController
   before_action :set_product, only: %i[ show edit update destroy ]
-  before_action :auth, only: %i[ show edit update destroy delete_all]
+  before_action :auth, only: %i[ show edit update destroy ]
 
   def index
     @products = Product.paginate(page: params[:page], per_page: 10)

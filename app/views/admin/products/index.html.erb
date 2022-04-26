@@ -1,7 +1,7 @@
-<h1>Products</h1>
+<h1 class="text-center">Products</h1>
 
 <%= form_tag discontinue_admin_products_path, method: :delete do %>
-  <table>
+  <table class="table">
     <thead>
       <tr>
         <th></th>
@@ -36,24 +36,24 @@
           <% end %>
 
           <% if current_user.admin? %>
-            <td><%= link_to 'Show', admin_product_path(product) %></td>
-            <td><%= link_to 'Edit', edit_admin_product_path(product) %></td>
-            <td><%= link_to 'Destroy', admin_product_path(product), method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+            <td><%= link_to 'Show', admin_product_path(product), class: "btn btn-outline-primary mt-2" %></td>
+            <td><%= link_to 'Edit', edit_admin_product_path(product), class: "btn btn-outline-primary mt-2" %></td>
+            <td><%= link_to 'Destroy', admin_product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger mt-2" %></td> 
           <% end %> 
         </tr>
       <% end %>
     </tbody>
   </table>
 
-  <%= submit_tag "Delete selected products", data: { confirm: 'Are you sure?' } %>
-  <%= link_to 'Delete all', delete_all_admin_products_path, method: :get, data: { confirm: 'Are you sure?' } %>
+  <%= submit_tag "Delete selected products", data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+  <%= link_to 'Delete all', delete_all_admin_products_path, method: :get, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
 <% end %>
 
 <%= will_paginate @products, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
 
 <br>
 <% if current_user.admin? %>
-  <%= link_to 'New Product', new_admin_product_path %>
+  <%= link_to 'New Product', new_admin_product_path, class: "btn btn-primary"%>
   <br>
-  <%= link_to 'Back', root_path %>
+  <%= link_to 'Back', root_path, class: "btn btn-outline-danger mt-2 mb-3"%>
 <% end %>

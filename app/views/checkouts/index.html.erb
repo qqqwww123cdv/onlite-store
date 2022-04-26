@@ -1,6 +1,6 @@
-<h1>Checkouts</h1>
+<h1 class="text-center">Checkouts</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Number of order</th>
@@ -28,17 +28,16 @@
         <% end %>
         <td><%= checkout.pick_up %></td>
         <td><%= checkout.user_id %></td>
-        <td><%= link_to 'Show', checkout %></td>
-        <td><%= link_to 'Edit', edit_checkout_path(checkout) %></td>
-        <td><%= link_to 'Destroy', checkout, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', checkout, class: "btn btn-outline-primary mt-2" %></td>
+        <td><%= link_to 'Edit', edit_checkout_path(checkout), class: "btn btn-outline-primary mt-2" %></td>
+        <td><%= link_to 'Destroy', checkout, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger mt-2" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-<%= link_to 'Back', root_path %>
-
+<%= link_to 'Back', root_path, class: "btn btn-outline-danger mt-2 mb-3" %>
 <%= will_paginate @checkouts, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
 
 

@@ -7,6 +7,7 @@ class OrderItemsController < ApplicationController
     session[:order_id] = @order.id
     redirect_to root_path, notice: "#{@order_item.product.product_name} was successfully added to the cart!"
     @order_item.product.product_name
+    Order.last.update(total_price: 0)
   end
 
   def update
