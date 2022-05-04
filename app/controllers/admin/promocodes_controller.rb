@@ -4,6 +4,16 @@ class Admin::PromocodesController < Admin::BaseController
 
   def index
     @promocodes = Promocode.all
+    respond_to do |format|
+      format.html
+      format.csv {send_data @promocodes.to_csv }
+    end
+  end
+
+  def import
+    Promocode.import(params[:file])
+    redirect_to admin_promocodes_path
+    flash[:success] = "Products imported!"
   end
 
   def show

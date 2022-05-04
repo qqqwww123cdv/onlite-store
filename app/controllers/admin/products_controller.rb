@@ -4,6 +4,16 @@ class Admin::ProductsController < Admin::BaseController
 
   def index
     @products = Product.paginate(page: params[:page], per_page: 10)
+    respond_to do |format|
+      format.html
+      format.csv {send_data @products.to_csv }
+    end
+  end
+
+  def import
+    Product.import(params[:file])
+    redirect_to admin_products_path
+    flash[:success] = "Products imported!"
   end
 
   def show

@@ -42,18 +42,25 @@
           <% end %> 
         </tr>
       <% end %>
-    </tbody>
+    </tbody>  
   </table>
-
   <%= submit_tag "Delete selected products", data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
   <%= link_to 'Delete all', delete_all_admin_products_path, method: :get, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-<% end %>
 
+  <%= link_to 'Download in CSV format', admin_products_path(format: "csv"), class: "btn btn-outline-primary"%>
+  <% if current_user.admin? %>
+    <%= link_to 'New Product', new_admin_product_path, class: "btn btn-primary"%>
+  <% end %>
+<% end %>
+  <%= form_tag import_admin_products_path, multipart: true do %>
+  <div class="custom-file file_max-width mt-2">
+    <%= file_field_tag :file, class: "custom-file-input" %>
+    <label class="custom-file-label" for="customFileLang">Выберите файл</label>
+    <%= submit_tag "Import", class: "btn btn-primary mb-3 mt-2" %>
+    <small class="text-muted mb-2">
+      Must be a CSV
+    </small>
+  </div>
+  <% end %>
 <%= will_paginate @products, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
-
-<br>
-<% if current_user.admin? %>
-  <%= link_to 'New Product', new_admin_product_path, class: "btn btn-primary"%>
-  <br>
-  <%= link_to 'Back', root_path, class: "btn btn-outline-danger mt-2 mb-3"%>
-<% end %>
+<%= link_to 'Back', root_path, class: "btn btn-outline-danger mt-4 mb-3"%>

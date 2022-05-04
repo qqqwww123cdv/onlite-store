@@ -43,15 +43,16 @@
     </small>
   </div>
 
-   <div class="field mb-3">
-    <%= form.label :image %>
-    <%= form.file_field :image, class: "form-control-file mb-3" %>
-    <small class="text-muted">
+
+  <div class="custom-file file_max-width">
+    <%= form.label :image, class: "custom-file-label" %>
+    <%= form.file_field :image, class: "custom-file-input" %>
+    <small class="text-muted mb-2">
       Must be a JPEG,JPG or PNG.
     </small>
   </div>
 
   <div class="actions">
-    <%= form.button "Сomplete", type: "submit", :class=> "btn btn-primary" %>
+    <%= form.button "Сomplete", type: "submit", :class=> "btn btn-primary mt-3" %>
   </div>
 <% end %>

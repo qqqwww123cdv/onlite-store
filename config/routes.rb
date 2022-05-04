@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
-  resources :checkouts
+  resources :checkouts do
+  collection do
+      post 'import'
+    end
+  end
   get 'cards/show'
   get "/admin", to: "admin/homepage#index"
   get "all_orders", to: "shops#orders"
@@ -13,11 +17,16 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :admin do
-    resources :promocodes
+    resources :promocodes do
+      collection do
+        post 'import'
+      end
+    end
     resources :products do
       collection do
         delete 'discontinue'
         get 'delete_all'
+        post 'import'
       end
     end
   end

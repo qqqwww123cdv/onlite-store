@@ -36,6 +36,8 @@
   </tbody>
 </table>
 
+<%= link_to 'Download in CSV format', checkouts_path(format: "csv"), class: "btn btn-outline-primary"%>
+
 <br>
 <%= link_to 'Back', root_path, class: "btn btn-outline-danger mt-2 mb-3" %>
 <%= will_paginate @checkouts, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
