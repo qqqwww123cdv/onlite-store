@@ -53,6 +53,13 @@
 
 <div class="container_product">
   <div class="work">
+    <div class="serch_product">
+      <%= search_form_for @q, url: shops_path, html: {method: :get} do |f| %>
+      <%= f.search_field :product_name_cont, class: 'form-control file_max-width mb-2'%>
+      <%= f.submit class: 'btn btn-primary' %> |
+      <%= link_to " Clear", request.path, class: "btn btn-outline-danger" %>
+      <% end %>
+    </div>
     <% @products.each do |product| %>
       <div class="work_col">
         <div class="card">

@@ -28,6 +28,7 @@ gem 'will_paginate-bootstrap'
 gem 'will_paginate-bootstrap4'
 gem 'friendly_id', '~> 5.4.0'
 gem 'rails-controller-testing'
+gem 'ransack'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password

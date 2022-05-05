@@ -3,7 +3,8 @@ class Admin::ProductsController < Admin::BaseController
   before_action :auth, only: %i[ show edit update destroy ]
 
   def index
-    @products = Product.paginate(page: params[:page], per_page: 10)
+    @q = Product.ransack(params[:q])
+    @products = @q.result.page(params[:page])
     respond_to do |format|
       format.html
       format.csv {send_data @products.to_csv }

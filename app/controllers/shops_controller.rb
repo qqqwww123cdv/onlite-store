@@ -1,6 +1,7 @@
 class ShopsController < ApplicationController
   def index
-    @products = Product.paginate(page: params[:page], per_page: 10)
+    @q = Product.ransack(params[:q])
+    @products = @q.result.page(params[:page])
     @order_item = current_order.order_items.new
     if user_signed_in? && current_user.admin?
       redirect_to admin_path

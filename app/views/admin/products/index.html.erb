@@ -1,7 +1,13 @@
 <h1 class="text-center">Products</h1>
 
+<%= search_form_for [:admin, @q] do |f| %>
+  <%= f.search_field :product_name_cont, class: 'form-control file_max-width mb-2'%>
+  <%= f.submit class: 'btn btn-primary' %> |
+  <%= link_to " Clear", request.path, class: "btn btn-outline-danger" %>
+<% end %>
+
 <%= form_tag discontinue_admin_products_path, method: :delete do %>
-  <table class="table">
+  <table class="table mt-2">
     <thead>
       <tr>
         <th></th>
