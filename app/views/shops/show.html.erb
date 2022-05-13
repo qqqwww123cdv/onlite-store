@@ -15,10 +15,16 @@
         </div>
         <div class="col-md-7">
           <div class="card-body">
-            <h5 class="card-title"><%= @product.product_name %></h5>
-            <p class="card-text">code: <%= @product.vendor_code %></p>
-            <h5 class="card-text"><%= @product.price %>$</h5>
-            <h5 class="card-text"><%= @product.description %></h5>
+            <h5 class="card-title list-group-item"><%= @product.product_name %></h5>
+            <p class="card-text list-group-item">Code: <%= @product.vendor_code %></p>
+            <p class="card-text list-group-item"><%= @product.price %>$</p>
+            <% if @product.description.empty?%>
+              <p class="card-text list-group-item">This product has no description</p>
+            <% else %>
+              <p class="card-text list-group-item"><%= @product.description %></p>
+            <% end %>
+            <p class="card-text list-group-item">Category:<%=  @product.category.name %></p>
+
           </div>
         </div>
         <% if user_signed_in? %>

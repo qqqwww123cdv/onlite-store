@@ -6,7 +6,8 @@ RSpec.describe Admin::ProductsController, :type => :controller do
 
   before do
     sign_in user
-    @product = Product.create(:id => "1", :product_name => "TV", :vendor_code => '1234567', :description => 'text', :price => '20')
+    @category = Category.create(:id => "1", :name=> "test", :description => "test2")
+    @product = Product.create(:id => "1", :product_name => "TV", :vendor_code => '1234567', :description => 'text', :price => '20', :category_id => '1')
   end
 
   describe "index" do
@@ -24,7 +25,7 @@ RSpec.describe Admin::ProductsController, :type => :controller do
     end
 
     it "add new Product" do
-      product = Product.new(:id => "2", :product_name => "Tb", :vendor_code => '1234566', :description => 'Text', :price => 20)
+      product = Product.new(:id => "2", :product_name => "Tb", :vendor_code => '1234566', :description => 'Text', :price => 20, :category_id => '1')
       expect(product).to be_valid
     end
   end
@@ -32,12 +33,12 @@ RSpec.describe Admin::ProductsController, :type => :controller do
   describe "create" do
     it 'successfully creates a new product' do
       expect{
-          post :create, params: { :product => { :id => "1", :product_name => "testuser", :vendor_code => "1234567", :description => "asdf", :price => "11" } }
+          post :create, params: { :product => { :id => "1", :product_name => "testuser", :vendor_code => "1234567", :description => "asdf", :price => "11", :category_id => '1' } }
         }.to change(Product,:count).by(1)
     end
 
     it 'product has not been create' do
-      post :create, params: { :product => { :id => "2", :product_name => "", :vendor_code => "", :description => "", :price => "" } }
+      post :create, params: { :product => { :id => "2", :product_name => "", :vendor_code => "", :description => "", :price => "", :category_id => '1' } }
       expect(response).to render_template(:new)
     end
   end
@@ -49,6 +50,7 @@ RSpec.describe Admin::ProductsController, :type => :controller do
         vendor_code: "1234567",
         description: "text",
         price: "20",
+        category_id: '1'
       }
       patch :update, params: { id:1, product: form_params }
 

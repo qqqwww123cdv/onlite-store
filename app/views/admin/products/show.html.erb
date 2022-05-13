@@ -1,6 +1,7 @@
 
 <div class="container">
   <div class="marl">
+    <p id="notice"><%= notice %></p>
     <ul class="list-group mb-3"style="max-width: 640px;">
      <div class="card mb-5" style="max-width: 640px;">
       <div class="row g-0">
@@ -17,6 +18,8 @@
             <p class="card-text list-group-item">Product code: <%=  @product.vendor_code %></p>
             <p class="card-text list-group-item">Product price:<%=  @product.price %>$</p>
             <p class="card-text list-group-item">Product description:<%=  @product.description %></p>
+            <p class="card-text list-group-item">Product description:<%=  @product.category.name %></p>
+
             
           </div>
         </div>

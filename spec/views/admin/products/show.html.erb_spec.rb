@@ -2,12 +2,15 @@ require 'rails_helper'
 
 RSpec.describe "admin/products/show", type: :view do
   before(:each) do
+    @category = Category.create(:id => "1", :name=> "test", :description => "test2")
+
     @product = assign(:product, Product.create!(
       product_name: "Product Name",
       image: nil,
       vendor_code: "12345qw",
       price: "9.99",
-      description: "MyText"
+      description: "MyText",
+      category_id: "1"
     ))
   end
 

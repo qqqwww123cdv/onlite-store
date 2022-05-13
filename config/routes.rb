@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'cards/show'
   get "/admin", to: "admin/homepage#index"
   get "all_orders", to: "shops#orders"
+  get "shops/categories", to: "shops#categories"
   post 'prom' => 'cards#prom'
 
   resources :shops, only:[:index, :show]
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :admin do
+    resources :categories
     resources :promocodes do
       collection do
         post 'import'

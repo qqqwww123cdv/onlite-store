@@ -2,12 +2,18 @@ require 'rails_helper'
 
 RSpec.describe Product, type: :model do
 
+  before do
+    @category = Category.create(:id => "1", :name=> "tqwwest", :description => "teqwqwst2")
+  end
+
   it 'has a name' do
+
     product = Product.new(
       product_name: '',
       vendor_code: '1111111',
       description: '1111111',
       price: '12',
+      category_id: '1'
     )
     expect(product).to_not be_valid
 
@@ -21,6 +27,7 @@ RSpec.describe Product, type: :model do
       vendor_code: '1111111',
       description: '1111111',
       price: '12',
+      category_id: '1'
     )
     expect(product).to_not be_valid
 
@@ -35,6 +42,7 @@ RSpec.describe Product, type: :model do
       vendor_code: '',
       description: '1111111',
       price: '12',
+      category_id: '1'
     )
     expect(product).to_not be_valid
 
@@ -48,6 +56,7 @@ RSpec.describe Product, type: :model do
       vendor_code: '123456',
       description: '1111111',
       price: '12',
+      category_id: '1'
     )
     expect(product).to_not be_valid
 
@@ -61,6 +70,7 @@ RSpec.describe Product, type: :model do
       vendor_code: '1111111',
       description: 'some text',
       price: '12',
+      category_id: '1'
     )
     expect(product).to be_valid
 
@@ -76,6 +86,7 @@ RSpec.describe Product, type: :model do
       vendor_code: '1234567',
       description: 'some text',
       price: '',
+      category_id: '1'
     )
     expect(product).to_not be_valid
 
@@ -89,6 +100,7 @@ RSpec.describe Product, type: :model do
       vendor_code: '1111111',
       description: '1111111',
       price: '12',
+      category_id: '1'
     )
     product.update(:product_name => "Big TV")
     expect(Product.find_by_product_name("Big TV")).to eq(product)
@@ -100,6 +112,7 @@ RSpec.describe Product, type: :model do
       vendor_code: '1111111',
       description: '1111111',
       price: '12',
+      category_id: '1'
     )
     product.destroy
     expect(Product.count).to eq(0)

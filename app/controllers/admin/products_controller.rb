@@ -1,10 +1,12 @@
 class Admin::ProductsController < Admin::BaseController
   before_action :set_product, only: %i[ show edit update destroy ]
   before_action :auth, only: %i[ show edit update destroy ]
-
+  before_action :set_categories
+  
   def index
     @q = Product.ransack(params[:q])
-    @products = @q.result.page(params[:page])
+
+    @products = @q.result(distinct: true).paginate(page: params[:page], per_page: 10)
     respond_to do |format|
       format.html
       format.csv {send_data @products.to_csv }
@@ -85,7 +87,11 @@ class Admin::ProductsController < Admin::BaseController
       @product = Product.friendly.find(params[:id])
     end
 
+    def set_categories
+      @categories = Category.all
+    end
+
     def product_params
-      params.require(:product).permit(:product_name, :image, :vendor_code, :price, :description)
+      params.require(:product).permit(:product_name, :image, :vendor_code, :price, :description, :category_id)
     end
 end

@@ -1,5 +1,19 @@
 <% if @check.size == 0 %>
-  <h3>You have no orders</h3>
+  <div class="container">
+    <div class="marl">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body cart">
+              <h3>You have no orders</h3>
+              <h4>Add something to make me happy :)</h4> 
+              <%= link_to "Continue shopping",  root_path, class: "btn btn-primary cart-btn-transform mt-2"%>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 <% else %>
   <h1 class="text-center">My checkouts</h1>
 

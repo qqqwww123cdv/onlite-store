@@ -75,7 +75,9 @@
             
           <div class="card-body">
             <h5 class="card-title"><%= product.product_name %></h5>
-            <p class="card-text">code: <%= product.vendor_code %></p>
+            <h5 class="card-text">code: <%= product.vendor_code %></h5>
+
+            <h5 class="card-text">category: <%= product.category.name %></h5>
             <h5 class="card-text"><%= product.price %>$</h5>
             <td><%= link_to 'Show', shop_path(product) %></td>
           </div>
@@ -93,8 +95,10 @@
         </div>
       </div>
     <% end %>
-  <%= will_paginate @products, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+  </div>
 </div>
+<%= will_paginate @products, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+
 
 
 

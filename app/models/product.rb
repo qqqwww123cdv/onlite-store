@@ -4,6 +4,8 @@ class Product < ApplicationRecord
   
   has_many :order_items
   has_one_attached :image
+  belongs_to :category
+  validates :category_id, presence: true
   validate :correct_image_type
   validates :product_name, presence: true, length: {minimum: 2, maximum: 500}
   validates :vendor_code, presence: true, length: {minimum: 7, maximum: 7}
