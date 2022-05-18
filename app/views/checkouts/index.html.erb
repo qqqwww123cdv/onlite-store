@@ -1,0 +1,45 @@
+<h1 class="text-center">Checkouts</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Number of order</th>
+      <th>Email</th>
+      <th>Name</th>
+      <th>Total price</th>
+      <th>Address</th>
+      <th>Pick up</th>
+      <th>User id</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @checkouts.each do |checkout| %>
+      <tr>
+        <td><%= checkout.id %></td>
+        <td><%= checkout.email %></td>
+        <td><%= checkout.name %></td>
+        <td><%= checkout.total_price %>$</td>
+        <% if checkout.pick_up == true %>
+          <td><%= checkout.address %></td>
+        <% else %>
+          <td> pickup </td>
+        <% end %>
+        <td><%= checkout.pick_up %></td>
+        <td><%= checkout.user_id %></td>
+        <td><%= link_to 'Show', checkout, class: "btn btn-outline-primary mt-2" %></td>
+        <td><%= link_to 'Edit', edit_checkout_path(checkout), class: "btn btn-outline-primary mt-2" %></td>
+        <td><%= link_to 'Destroy', checkout, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger mt-2" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Download in CSV format', checkouts_path(format: "csv"), class: "btn btn-outline-primary"%>
+
+<br>
+<%= link_to 'Back', root_path, class: "btn btn-outline-danger mt-2 mb-3" %>
+<%= will_paginate @checkouts, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+
+

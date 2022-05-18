@@ -1,0 +1,56 @@
+   <%= form_with model: @checkout, :html => {:class => "form-group"} do |form| %>
+      <% if @checkout.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@checkout.errors.count, "error") %> prohibited this checkout from being saved:</h2>
+
+          <ul>
+            <% @checkout.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+        <h3>Enter your details to place an order</h3>
+      <div class="field">
+        <%= form.label :email %>
+        <%= form.text_field :email, class: "form-control max" %>
+      </div>
+
+      <div class="field">
+        <%= form.label :name %>
+        <%= form.text_field :name, class: "form-control max" %>
+      </div>
+
+      <div class="field">
+        <%= form.label :address %>
+        <%= form.text_field :address, class: "form-control max" %>
+      </div>
+
+      <%= form.radio_button :pick_up, true, :checked => true  %>
+      <%= form.label :pick_up, "Pick up order in store"  %>
+
+      <%= form.radio_button :pick_up, false%>
+      <%= form.label :pick_up, "have the order delivered", :value => "true" %> 
+
+      <% if current_order.total_price != 0 %>
+        <div class="field">
+          <%= form.text_field :total_price, value: (current_order.total_price), type: :hidden %>
+        </div>
+      <% else %>
+        <div class="field">
+          <%= form.text_field :total_price, value: (current_order.subtotal), type: :hidden %>
+        </div>
+      <% end %> 
+
+
+      <div class="field">
+        <%= form.number_field :user_id, id: :checkout_user_id, value: current_user.id, type: :hidden %>
+      </div>
+
+      <%= link_to "Back",  cards_path, class: "btn btn-outline-danger mt-2 mb-2" %>
+
+      <div class="actions">
+        <%= form.submit "Create checkout", class:"btn btn-success"%>
+      </div>
+    <% end %>

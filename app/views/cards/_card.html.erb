@@ -1,0 +1,10 @@
+<%= link_to cards_path do%>
+  <i class="fa-solid fa-cart-shopping fa-1x"></i>
+<% end %>
+
+<% unless current_order.order_items.size == 0 %>
+  <%= link_to cards_path do%>
+    <%= link_to "#{current_order.order_items.size} items with a value of #{current_order.subtotal }$", cards_path%>
+  <% end %>
+<% end %>
+

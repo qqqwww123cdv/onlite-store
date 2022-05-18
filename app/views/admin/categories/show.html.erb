@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="marl">
+    <p id="notice"><%= notice %></p>
+    <ul class="list-group mb-3"style="max-width: 640px;">
+      <div class="list-group card mb-5">
+        <div class="row g-0">
+          <div class="col-md-12">
+            <div class="card-body">
+              <h5 class="card-title list-group-item">Category name:<%=  @category.name %></h5>
+              <p class="card-text list-group-item">Category description:<%=  @category.description %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <%= link_to 'Edit', edit_admin_category_path(@category), class: "btn btn-outline-primary mt-2 mb-3" %>
+    <%= link_to 'Back', admin_categories_path, class: "btn btn-outline-danger mt-2 mb-3" %>
+  </div>
+</div>

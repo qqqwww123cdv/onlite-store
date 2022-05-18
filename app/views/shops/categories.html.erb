@@ -1,0 +1,45 @@
+<% @cat.each do |cat| %>
+  <h2 class="text-center"><%= cat.name %></h2>
+  <h4 class="text-center"><%= cat.description %></h4> 
+  <% @product.each do |prod| %>
+    <% unless prod.category.name != cat.name %>
+    <ul class="list-group mb-3">
+    <div class="card mb-5  marl_cat">
+      <div class="row g-0">
+        <div class="col-md-5 mt-3 ">
+          <% if prod.image.attached? == false %>
+            <%= image_tag("plh.png", class: "img-fluid rounded-start dop") %>
+          <% else %>
+            <%= image_tag(prod.image, class: "img-fluid rounded-start dop") %>
+          <% end %>
+        </div>
+        <div class="col-md-6">
+          <div class="card-body del_m">
+            <h5 class="card-title list-group-item"><%= prod.product_name %></h5>
+            <p class="card-text list-group-item">Code: <%=  prod.vendor_code %></p>
+            <p class="card-text list-group-item"><%=  prod.price %>$</p>
+            <% if prod.description.empty?%>
+              <p class="card-text list-group-item">This product has no description</p>
+            <% else %>
+              <p class="card-text list-group-item"><%= prod.description %></p>
+            <% end %>
+          </div>
+        </div>
+        <% if user_signed_in? %>
+          <%= form_for @order_item, :html => {:class => "form-inline"},  remote: true do |f|%>
+            <div class="form-group mx-sm-3 mb-2">
+              <%= f.hidden_field :product_id, :value => prod.id, class: "form-control" %>
+              <%= f.number_field :quantity, :value => 1, :min =>  1, class: "form-control ml-3"%>
+              <%= f.number_field :user_id, id: :order_item_user_id, value: current_user.id, type: :hidden %>
+            </div>
+            <%= f.submit "Add to Card ", class: "btn btn-primary mb-2"%>
+            <td><%= link_to 'Show', shop_path(prod), class: "btn btn-primary mb-2 ml-2" %></td>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <% end %> 
+  <% end %>
+<% end %>
+<%= link_to "Back",  root_path, class: "btn btn-outline-danger mt-2 marl_cat" %>
+

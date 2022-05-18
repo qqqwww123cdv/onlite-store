@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-light" bg-light style="background-color: #efefef;">
+  <%= link_to 'Online Store', root_path, class: "navbar-brand" %>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <% unless user_signed_in? && current_user.admin? %>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <%= link_to cards_path do%>
+            <i class="fa-solid fa-cart-shopping fa-1x nav-link"></i>
+          <% end %>
+        </li>
+          <%= link_to "Card", cards_path, class: "nav-link"%>
+        </li>
+        <li class="nav-item ">
+          <% unless current_order.order_items.size == 0 %>
+            <%= link_to cards_path do%>
+              <%= link_to "#{current_order.order_items.size} items with a value of #{current_order.subtotal }$", cards_path, class: "nav-link"%>
+            <% end %>
+          <% end %>
+        </li>
+        <li class="nav-item">
+        <% if user_signed_in? %>
+          <%= link_to 'My orders', all_orders_path, class: "nav-link" %>
+        <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Сategories", shops_categories_path, class: "nav-link" %>
+        </li>
+      </ul>
+    <% end %>
+    <span class=" my-2 my-lg-0">      
+      <% if user_signed_in? %>
+      <%= link_to "sign out", destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= link_to "sign in", new_user_session_path %>
+    <% end %>
+    </span>
+  </div>
+</nav>

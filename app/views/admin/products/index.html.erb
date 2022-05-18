@@ -1,0 +1,79 @@
+<h1 class="text-center">Products</h1>
+
+
+    
+
+<div class="serch_product">
+  <%= search_form_for [:admin, @q] do |f| %>
+    <%= f.search_field :product_name_cont, class: 'form-control file_max-width mb-2'%>
+    <%= f.submit class: 'btn btn-primary' %> |
+    <%= link_to " Clear", request.path, class: "btn btn-outline-danger" %>
+  <% end %>
+</div>
+
+<%= form_tag discontinue_admin_products_path, method: :delete do %>
+  <table class="table mt-2">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Product name</th>
+        <th>Image</th>
+        <th>Vendor code</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%= check_box_tag "product_ids[]", product.id%></td>
+          <td><%= product.product_name %></td>
+
+          <% if product.image.attached? == false %>
+            <td><%= image_tag("plh.png", class: "max_img_width") %></td>
+          <% else %>
+            <td><%= image_tag(product.image, class: "max_img_width")%></td>
+          <% end %>
+
+          <td><%= product.vendor_code %></td>
+          <td><%= product.price %>$</td>
+
+          <% if product.description.empty?%>
+            <td><p>This product has no description</p></td>
+          <% else %>
+            <td><%= product.description %></td>
+          <% end %>
+          <td><%= product.category.name %></td>
+
+          <% if current_user.admin? %>
+            <td><%= link_to 'Show', admin_product_path(product), class: "btn btn-outline-primary mt-2" %></td>
+            <td><%= link_to 'Edit', edit_admin_product_path(product), class: "btn btn-outline-primary mt-2" %></td>
+            <td><%= link_to 'Destroy', admin_product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger mt-2" %></td> 
+          <% end %> 
+        </tr>
+      <% end %>
+    </tbody>  
+  </table>
+  <%= submit_tag "Delete selected products", data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+  <%= link_to 'Delete all', delete_all_admin_products_path, method: :get, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+
+  <%= link_to 'Download in CSV format', admin_products_path(format: "csv"), class: "btn btn-outline-primary"%>
+  <% if current_user.admin? %>
+    <%= link_to 'New Product', new_admin_product_path, class: "btn btn-primary"%>
+  <% end %>
+<% end %>
+  <%= form_tag import_admin_products_path, multipart: true do %>
+  <div class="custom-file file_max-width mt-2">
+    <%= file_field_tag :file, class: "custom-file-input" %>
+    <label class="custom-file-label" for="customFileLang">Выберите файл</label>
+    <%= submit_tag "Import", class: "btn btn-primary mb-3 mt-2" %>
+    <small class="text-muted mb-2">
+      Must be a CSV
+    </small>
+  </div>
+  <% end %>
+<%= will_paginate @products, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+<%= link_to 'Back', root_path, class: "btn btn-outline-danger mt-4 mb-3"%>
