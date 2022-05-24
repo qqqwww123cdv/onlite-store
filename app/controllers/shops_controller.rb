@@ -25,4 +25,9 @@ class ShopsController < ApplicationController
     @order_item = current_order.order_items.new
   end
 
+  def about_us
+  end
+  
+  def bonus
+  end
 end

@@ -1,0 +1,82 @@
+<div class="jumbotron text-center">
+  <h1>Online Store</h1> 
+  <p>We specialize in any products</p> 
+</div>
+<div id="about" class="container-fluid">
+  <div class="row">
+    <div class="col-sm-8">
+      <h2>About Company Page</h2><br>
+      <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4><br>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <div class="col-sm-4">
+      <%= image_tag("store.jpg") %>
+    </div>
+  </div>
+</div>
+<div id="services" class="container-fluid text-center">
+  <h2>SERVICES</h2>
+  <h4>What we offer</h4>
+  <br>
+  <div class="row slideanim">
+    <div class="col-sm-4">
+      <i class="fa fa-check fa-2xl" aria-hidden="true"></i>
+      <h4>Over 30000+ products</h4>
+      <p>All kinds and types</p>
+    </div>
+    <div class="col-sm-4">
+      <i class="fas fa-shipping-fast fa-2xl"></i>
+      <h4>Fast delivery</h4>
+      <p>More than 15+ cars in each city</p>
+    </div>
+    <div class="col-sm-4">
+      <i class="fa-solid fa-arrow-up-wide-short fa-2xl"></i>
+      <h4>Quality assurance</h4>
+      <p>Each product is from trusted manufacturers</p>
+    </div>
+  </div>
+  <br><br>
+  <div class="row slideanim">
+    <div class="col-sm-4">
+      <i class="fas fa-store fa-2xl"></i>
+      <h4>Large chain of stores</h4>
+      <p>104 stores around the world</p>
+    </div>
+    <div class="col-sm-4">
+      <i class="fas fa-money-bill-alt fa-2xl"></i>
+      <h4>Low prices</h4>
+      <p>Our stores have the lowest prices</p>
+    </div>
+    <div class="col-sm-4">
+      <i class="fas fa-gift fa-2xl"></i>
+      <h4 style="color:#303030;">Bonuses</h4>
+      <p>Discounts and bonuses for everyone</p>
+    </div>
+  </div>
+</div>
+<div class="container-fluid bg-grey">
+  <div class="row">
+    <div class="col-sm-4">
+      <%= image_tag("store2.jpg") %>
+    </div>
+    <div class="col-sm-8">
+      <h2>Our Values</h2><br>
+      <h4><strong>MISSION:</strong> Our mission lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4><br>
+      <p><strong>VISION:</strong> Our vision Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+  </div>
+</div>
+<script>
+$(document).ready(function(){
+  $(window).scroll(function() {
+    $(".slideanim").each(function(){
+      var pos = $(this).offset().top;
+      var winTop = $(window).scrollTop();
+        if (pos < winTop + 600) {
+          $(this).addClass("slide");
+        }
+    });
+  });
+})
+</script>

@@ -26,6 +26,26 @@
         <li class="nav-item">
           <%= link_to "Сategories", shops_categories_path, class: "nav-link" %>
         </li>
+        <li class="nav-item">
+          <%= link_to "Аbout us", shops_about_us_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Bonus program", shops_bonus_path, class: "nav-link" %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Сontacts
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <p class="dropdown-item">+375 29 666 88 99</p>
+              <p class="dropdown-item">+375 44 555 66 77</p>
+              <p class="dropdown-item">+375 25 444 55 66</p>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Viber", "https://www.viber.com/ru", class: "dropdown-item viber" %>
+              <%= link_to "Instagram", "https://www.instagram.com", class: "dropdown-item inst" %>
+              <%= link_to "Telegram", "https://web.telegram.org", class: "dropdown-item tg" %>
+            </div>
+          </li>
+        </li>
       </ul>
     <% end %>
     <span class=" my-2 my-lg-0">      

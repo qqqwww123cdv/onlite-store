@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get "all_orders", to: "shops#orders"
   get "shops/categories", to: "shops#categories"
   post 'prom' => 'cards#prom'
+  get "shops/about_us", to: "shops#about_us"
+  get "shops/bonus", to: "shops#bonus"
 
   resources :shops, only:[:index, :show]
   resources :order_items
