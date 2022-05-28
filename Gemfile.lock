@@ -294,7 +294,6 @@ DEPENDENCIES
   simplecov
   spring
   sqlite3 (~> 1.4)
-  thor
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)
@@ -308,4 +307,4 @@ RUBY VERSION
    ruby 2.7.0p0
 
 BUNDLED WITH
-   2.2.32
+   2.3.14

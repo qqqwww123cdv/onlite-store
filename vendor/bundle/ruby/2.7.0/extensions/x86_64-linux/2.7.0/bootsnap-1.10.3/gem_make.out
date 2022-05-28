@@ -1,0 +1,15 @@
+current directory: /home/silitski/diplom/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.10.3/ext/bootsnap
+/usr/bin/ruby2.7 -I /usr/lib/ruby/2.7.0 -r ./siteconf20220524-97227-e11ykx.rb extconf.rb
+creating Makefile
+
+current directory: /home/silitski/diplom/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.10.3/ext/bootsnap
+make "DESTDIR=" clean
+
+current directory: /home/silitski/diplom/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.10.3/ext/bootsnap
+make "DESTDIR="
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.so
+
+current directory: /home/silitski/diplom/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.10.3/ext/bootsnap
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 bootsnap.so ./.gem.20220524-97227-n75ekv/bootsnap
