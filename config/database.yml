@@ -22,5 +22,5 @@ test:
 
 production:
   adapter: postgresql
-  database: my_databbbase_production
+  database: <%= ENV['DATABASE_URL'] %>
 
