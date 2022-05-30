@@ -89,8 +89,8 @@ ActiveRecord::Schema.define(version: 2022_05_10_153255) do
   create_table "order_promocodes", id: false, force: :cascade do |t|
     t.integer "order_id", null: false
     t.integer "promocode_id", null: false
-    t.index "\"order\"", name: "index_order_promocode_on_order"
-    t.index "\"promocode\"", name: "index_order_promocode_on_promocode"
+    t.index ["order_id", "promocode_id"], name: "index_order_promocodes_on_order_id_and_promocode_id"
+    t.index ["promocode_id", "order_id"], name: "index_order_promocodes_on_promocode_id_and_order_id"
   end
 
   create_table "orders", force: :cascade do |t|
