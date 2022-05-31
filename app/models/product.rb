@@ -11,8 +11,16 @@ class Product < ApplicationRecord
   validates :vendor_code, presence: true, length: {minimum: 7, maximum: 7}
   validates :description, length: {minimum: 0, maximum: 5000}
   validates :price, presence: true, length: {minimum: 1, maximum: 7}
+  validate :force_negative
 
   private
+
+  def force_negative
+    
+    if price.blank? or price < 1
+      errors.add(:price, "must be greater than 0")
+    end
+  end
 
   def self.to_csv
     CSV.generate do |csv|

@@ -1,4 +1,6 @@
-<% if current_user.admin? %>
+<% unless user_signed_in? && current_user.admin? %>
+  <h1 class="text-center">Only available for admin</h1>
+<% else %>
 <h1 class="text-center">Promocodes</h1>
 
   <table class="table">

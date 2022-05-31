@@ -12,6 +12,7 @@ class CheckoutsController < ApplicationController
   def show
     @order_items = Order.find(params[:id]).order_items
     @order_item = Order.find(params[:id])
+    session[:order_id] = nil
   end
 
   def new
@@ -25,7 +26,6 @@ class CheckoutsController < ApplicationController
   def create
     @checkout = Checkout.new(checkout_params)
     @order_items = current_order.order_items
-    session[:order_id] = nil
 
     respond_to do |format|
       if @checkout.save
