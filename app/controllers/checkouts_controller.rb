@@ -12,7 +12,6 @@ class CheckoutsController < ApplicationController
   def show
     @order_items = Order.find(params[:id]).order_items
     @order_item = Order.find(params[:id])
-    session[:order_id] = nil
   end
 
   def new
@@ -31,6 +30,7 @@ class CheckoutsController < ApplicationController
       if @checkout.save
         format.html { redirect_to checkout_url(@checkout), notice: "Your order is accepted!" }
         format.json { render :show, status: :created, location: @checkout }
+        session[:order_id] = nil
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @checkout.errors, status: :unprocessable_entity }
