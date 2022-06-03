@@ -10,15 +10,17 @@ class Product < ApplicationRecord
   validates :product_name, presence: true, length: {minimum: 2, maximum: 500}
   validates :vendor_code, presence: true, length: {minimum: 7, maximum: 7}
   validates :description, length: {minimum: 0, maximum: 5000}
-  validates :price, presence: true, length: {minimum: 1, maximum: 7}
+  validates :price, presence: true, length: {minimum: 1, maximum:7}
+
   validate :force_negative
 
   private
 
   def force_negative
-    
-    if price.blank? or price < 1
-      errors.add(:price, "must be greater than 0")
+    unless price.blank?
+      if price < 1
+        errors.add(:price, "Must be greater than 0")
+      end
     end
   end
 

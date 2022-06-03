@@ -1,4 +1,4 @@
-   <%= form_with model: @checkout, :html => {:class => "form-group"} do |form| %>
+   <%= form_with model: @checkout, :html => {:class => "form-group", :id => "user_signup_form"} do |form| %>
       <% if @checkout.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@checkout.errors.count, "error") %> prohibited this checkout from being saved:</h2>
@@ -22,16 +22,15 @@
         <%= form.text_field :name, class: "form-control max" %>
       </div>
 
-      <div class="field">
-        <%= form.label :address %>
-        <%= form.text_field :address, class: "form-control max" %>
+      <div id="radio">
+        <%= form.radio_button :pick_up, "self_pickup", checked: true%>Self-pickup
+        <%= form.radio_button :pick_up, "delivery", id: "delivery" %>  Delivery
       </div>
-
-      <%= form.radio_button :pick_up, true, :checked => true  %>
-      <%= form.label :pick_up, "Pick up order in store"  %>
-
-      <%= form.radio_button :pick_up, false%>
-      <%= form.label :pick_up, "have the order delivered", :value => "true" %> 
+      
+      <div class="field" id="address">
+        <%= form.label :address %>
+        <%= form.text_field :address, class: "form-control max", id: "address" %>
+      </div>
 
       <% if current_order.total_price != 0 %>
         <div class="field">
@@ -51,6 +50,6 @@
       <%= link_to "Back",  cards_path, class: "btn btn-outline-danger mt-2 mb-2" %>
 
       <div class="actions">
-        <%= form.submit "Create checkout", class:"btn btn-success"%>
+        <%= form.submit "Create checkout", class:"btn btn-success", id: "submit"%>
       </div>
     <% end %>

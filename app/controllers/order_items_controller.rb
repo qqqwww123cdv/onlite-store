@@ -21,6 +21,7 @@ end
   def destroy
     @order_item = @order.order_items.find(params[:id])
     @order_item.destroy
+    Order.last.update(total_price: 0)
     @order_items = current_order.order_items
     redirect_to root_path, notice: "#{@order_item.product.product_name} was successfully destroyed."
   end

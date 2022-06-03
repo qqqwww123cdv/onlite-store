@@ -80,7 +80,7 @@ RSpec.describe Product, type: :model do
     expect(product).to_not be_valid
   end
 
-  it 'has a price' do
+  it 'price' do
     product = Product.new(
       product_name: 'anton',
       vendor_code: '1234567',
@@ -92,6 +92,15 @@ RSpec.describe Product, type: :model do
 
     product.price = '12'
     expect(product).to be_valid
+
+    product.price = '-8'
+    expect(product).to_not be_valid
+
+    product.price = '123456712'
+    expect(product).to_not be_valid
+
+    product.price = '0'
+    expect(product).to_not be_valid
   end
 
   it 'checks that a product can be updated' do

@@ -57,7 +57,8 @@
       <% end %>
     </tbody>  
   </table>
-  <%= submit_tag "Delete selected products", data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+
+  <%= submit_tag "Delete selected products", data: { confirm: 'Are you sure?' }, class: "btn btn-danger", id: "submit" %>
   <%= link_to 'Delete all', delete_all_admin_products_path, method: :get, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
 
   <%= link_to 'Download in CSV format', admin_products_path(format: "csv"), class: "btn btn-outline-primary"%>
@@ -78,3 +79,14 @@
 <%= will_paginate @products, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
 <%= link_to 'Back', root_path, class: "btn btn-outline-danger mt-4 mb-3"%>
 <% end %>
+<script>
+  $('#submit').prop("disabled", true);
+  $('input:checkbox').click(function() {
+    if ($(this).is(':checked')) {
+    $('#submit').prop("disabled", false);
+    } else {
+    if ($('.checks').filter(':checked').length < 1){
+    $('#submit').attr('disabled',true);}
+    }
+  });
+</script>

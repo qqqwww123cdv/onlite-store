@@ -8,7 +8,7 @@ RSpec.describe "admin/products/show", type: :view do
       product_name: "Product Name",
       image: nil,
       vendor_code: "12345qw",
-      price: "9.99",
+      price: "10",
       description: "MyText",
       category_id: "1"
     ))
@@ -19,7 +19,7 @@ RSpec.describe "admin/products/show", type: :view do
     expect(rendered).to match(/Product Name/)
     expect(rendered).to match(//)
     expect(rendered).to match(/12345qw/)
-    expect(rendered).to match(/9.99/)
+    expect(rendered).to match(/10/)
     expect(rendered).to match(/MyText/)
   end
 end

@@ -1,9 +1,62 @@
 <div class="container">
   <div class="marl">
     <h1>Editing Product</h1>
-    <%= render 'form', product: @product %>
+  <%= form_with(model: [:admin, @product], :html => {:class => "form-group"}) do |form| %>
+    <% if @product.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
 
-    <%= link_to 'Show', admin_product_path(@product), class: "btn btn-outline-primary mt-2 mb-3" %> |
-    <%= link_to 'Back', admin_products_path, class: "btn btn-outline-danger mt-2 mb-3" %>
+        <ul>
+          <% @product.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field mb-3">
+      <%= form.label :product_name %>
+      <%= form.text_field :product_name, class: "form-control max" %>
+      <small class="text-muted">
+        Must be 2-500 characters long.
+      </small>
+    </div>
+
+    <div class="field mb-3">
+      <%= form.label :vendor_code %>
+      <%= form.text_area :vendor_code, class: "form-control max" %>
+      <small class="text-muted">
+        Must be 7 characters long.
+      </small>
+    </div>
+
+    <div class="field mb-3">
+      <%= form.label :description %>
+      <%= form.text_area :description, class: "form-control max" %>
+      <small class="text-muted">
+        Must be 0-5000 characters long.
+      </small>
+    </div>
+
+    <div class="field mb-3">
+      <%= form.label :category %>
+      <%= form.select :category_id, options_for_select(@categories.collect {|cat| [cat.name, cat.id]}), class: "form-control max" %>
+    </div>
+
+    <div class="custom-file file_max-width">
+      <%= form.label :image, class: "custom-file-label" %>
+      <%= form.file_field :image, class: "custom-file-input" %>
+      <small class="text-muted mb-2">
+        Must be a JPEG,JPG or PNG.
+      </small>
+    </div>
+
+    <div class="actions">
+      <%= form.button "Сomplete", type: "submit", :class=> "btn btn-primary mt-3" %>
+    </div>
+  <% end %>
+
+  <%= link_to 'Show', admin_product_path(@product), class: "btn btn-outline-primary mt-2 mb-3" %> |
+  <%= link_to 'Back', admin_products_path, class: "btn btn-outline-danger mt-2 mb-3" %>
   </div>
 </div>
