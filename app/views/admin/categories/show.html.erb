@@ -1,18 +1,60 @@
-<div class="container">
-  <div class="marl">
-    <p id="notice"><%= notice %></p>
-    <ul class="list-group mb-3"style="max-width: 640px;">
-      <div class="list-group card mb-5">
-        <div class="row g-0">
-          <div class="col-md-12">
-            <div class="card-body">
-              <h5 class="card-title list-group-item">Category name:<%=  @category.name %></h5>
-              <p class="card-text list-group-item">Category description:<%=  @category.description %></p>
+<% if  current_user.admin? %>
+  <div class="container">
+    <div class="marl">
+      <p id="notice"><%= notice %></p>
+      <ul class="list-group mb-3"style="max-width: 640px;">
+        <div class="list-group card mb-5">
+          <div class="row g-0">
+            <div class="col-md-12">
+              <div class="card-body">
+                <h5 class="card-title list-group-item">Category name:<%=  @category.name %></h5>
+                <p class="card-text list-group-item">Category description:<%=  @category.description %></p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    <%= link_to 'Edit', edit_admin_category_path(@category), class: "btn btn-outline-primary mt-2 mb-3" %>
-    <%= link_to 'Back', admin_categories_path, class: "btn btn-outline-danger mt-2 mb-3" %>
+      <%= link_to 'Edit', edit_admin_category_path(@category), class: "btn btn-outline-primary mt-2 mb-3" %>
+      <%= link_to 'Back', admin_categories_path, class: "btn btn-outline-danger mt-2 mb-3" %>
+    </div>
   </div>
-</div>
+<% else %>
+  <h2 class="text-center"><%= @category.name %></h2>
+  <h4 class="text-center"><%= @category.description %></h4> 
+  <% @product.each do |prod| %>
+    <ul class="list-group mb-3">
+    <div class="card mb-5  marl_cat">
+      <div class="row g-0">
+        <div class="col-md-5 mt-3 ">
+          <% if prod.image.attached? == false %>
+            <%= image_tag("plh.png", class: "img-fluid rounded-start dop") %>
+          <% else %>
+            <%= image_tag(prod.image, class: "img-fluid rounded-start dop") %>
+          <% end %>
+        </div>
+        <div class="col-md-6">
+          <div class="card-body del_m">
+            <h5 class="card-title list-group-item"><%= prod.product_name %></h5>
+            <p class="card-text list-group-item">Code: <%=  prod.vendor_code %></p>
+            <p class="card-text list-group-item"><%=  prod.price %>$</p>
+            <% if prod.description.empty?%>
+              <p class="card-text list-group-item">This product has no description</p>
+            <% else %>
+              <p class="card-text list-group-item"><%= prod.description %></p>
+            <% end %>
+            <% if user_signed_in? %>
+            <%= form_for @order_item, :html => {:class => "form-inline mt-3"},  remote: true do |f|%>
+              <div class="form-group mx-sm-3 mb-2">
+                <%= f.hidden_field :product_id, :value => prod.id, class: "form-control" %>
+                <%= f.number_field :quantity, :value => 1, :min =>  1, class: "form-control ml-3"%>
+                <%= f.number_field :user_id, id: :order_item_user_id, value: current_user.id, type: :hidden %>
+              </div>
+              <%= f.submit "Add to Card ", class: "btn btn-primary mb-2"%>
+              <td><%= link_to 'Show', shop_path(prod), class: "btn btn-primary mb-2 ml-2" %></td>
+            <% end %>
+          <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %> 
+<% end %> 

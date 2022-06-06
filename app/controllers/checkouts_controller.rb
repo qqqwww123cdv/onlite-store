@@ -1,5 +1,5 @@
 class CheckoutsController < ApplicationController
-  before_action :set_checkout, only: %i[ show edit update destroy ]
+  before_action :set_checkout, only: %i[ show update destroy ]
 
   def index
     @checkouts = Checkout.paginate(page: params[:page], per_page: 10)
@@ -19,9 +19,6 @@ class CheckoutsController < ApplicationController
     @order_items = current_order.order_items
   end
 
-  def edit
-  end
-
   def create
     @checkout = Checkout.new(checkout_params)
     @order_items = current_order.order_items
@@ -33,18 +30,6 @@ class CheckoutsController < ApplicationController
         session[:order_id] = nil
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @checkout.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def update
-    respond_to do |format|
-      if @checkout.update(checkout_params)
-        format.html { redirect_to checkout_url(@checkout), notice: "Checkout was successfully updated." }
-        format.json { render :show, status: :ok, location: @checkout }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @checkout.errors, status: :unprocessable_entity }
       end
     end

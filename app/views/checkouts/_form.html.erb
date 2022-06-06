@@ -16,21 +16,32 @@
         <%= form.label :email %>
         <%= form.text_field :email, class: "form-control max" %>
       </div>
+      <small class="text-muted">
+      Email can't be blank
+      </small>
 
       <div class="field">
         <%= form.label :name %>
-        <%= form.text_field :name, class: "form-control max" %>
+        <%= form.text_field :name, class: "form-control max", id: "name" %>
       </div>
+      <small class="text-muted">
+      Name can't be blank and minimum is 1 character
+      </small>
+      </br></br>
 
       <div id="radio">
-        <%= form.radio_button :pick_up, "self_pickup", checked: true%>Self-pickup
+        <%= form.radio_button :pick_up, "self_pickup", id: "pick", checked: true%>Self-pickup
         <%= form.radio_button :pick_up, "delivery", id: "delivery" %>  Delivery
       </div>
       
-      <div class="field" id="address">
+      <div class="field" style="display:none" id="address">
         <%= form.label :address %>
-        <%= form.text_field :address, class: "form-control max", id: "address" %>
+        <%= form.text_field :address, class: "form-control max", id: "aaddress"%>
+        <small class="text-muted">
+        Must be at least 20 characters
+        </small>
       </div>
+      
 
       <% if current_order.total_price != 0 %>
         <div class="field">
@@ -50,6 +61,6 @@
       <%= link_to "Back",  cards_path, class: "btn btn-outline-danger mt-2 mb-2" %>
 
       <div class="actions">
-        <%= form.submit "Create checkout", class:"btn btn-success", id: "submit"%>
+        <%= form.submit "Create checkout", class:"btn btn-success", id: "submit" %>
       </div>
     <% end %>

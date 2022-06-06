@@ -4,8 +4,10 @@
       <li class="list-group-item">Number of order: <%= @checkout.id %></li>
       <li class="list-group-item">Name: <%= @checkout.name %></li>
       <li class="list-group-item">Email: <%= @checkout.email %></li>
-      <li class="list-group-item">Pick up: <%= @checkout.pick_up %></li>
-      <% if @checkout.pick_up == true %>
+      <% if @checkout.address.empty? %>
+        <li class="list-group-item">Pick up:  pickup </li>
+      <% else %>
+        <li class="list-group-item">Pick up:  delivery </li>
         <li class="list-group-item">Address:  <%= @checkout.address %></li>
       <% end %>
     </ul>

@@ -2,7 +2,9 @@
   <h1 class="text-center">This is users page</h1>
 <% else %>
   <% @cat.each do |cat| %>
-    <h2 class="text-center"><%= cat.name %></h2>
+    <%= link_to cat_path(cat) do %> 
+        <h2 class="text-center"><%= cat.name %></h2>
+    <% end %>
     <h4 class="text-center"><%= cat.description %></h4> 
     <% @product.each do |prod| %>
       <% unless prod.category.name != cat.name %>

@@ -47,8 +47,7 @@
 <% end %>
 
 <script> 
-
-function delivery_choice() {
+  function delivery_choice() {
     let delivery = document.getElementById('delivery');
     let radio = document.getElementById('radio');
     let address = document.getElementById('address');
@@ -68,6 +67,26 @@ function delivery_choice() {
     });
   }
 
+  const submit = document.getElementById('submit');
+  const aaddress = document.getElementById('aaddress');
+  const name = document.getElementById('name');
+  const pick = document.getElementById('pick');
+
+  $('#submit').prop("disabled", false);
+    $( "#delivery" ).on( "click", function(){
+      submit.disabled = true
+      if (aaddress.value.length > 20) {
+        submit.disabled = false
+      }else {
+      $( "#aaddress" ).change(function(){
+      if (aaddress.value.length > 20) {
+      submit.disabled = false
+      } else {
+      submit.disabled = true
+      }
+      })
+    }
+      })
 </script>
 
 

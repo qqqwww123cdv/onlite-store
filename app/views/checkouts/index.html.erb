@@ -9,8 +9,8 @@
         <th>Email</th>
         <th>Name</th>
         <th>Total price</th>
-        <th>Address</th>
         <th>Pick up</th>
+        <th>Address</th>
         <th>User id</th>
         <th colspan="3"></th>
       </tr>
@@ -23,15 +23,14 @@
           <td><%= checkout.email %></td>
           <td><%= checkout.name %></td>
           <td><%= checkout.total_price %>$</td>
-          <% if checkout.pick_up == true %>
-            <td><%= checkout.address %></td>
+          <% if checkout.address.empty? %>
+            <td>pick up</td>
           <% else %>
-            <td> pickup </td>
+            <td> delivery </td>
           <% end %>
-          <td><%= checkout.pick_up %></td>
+          <td><%= checkout.address %></td>
           <td><%= checkout.user_id %></td>
           <td><%= link_to 'Show', checkout, class: "btn btn-outline-primary mt-2" %></td>
-          <td><%= link_to 'Edit', edit_checkout_path(checkout), class: "btn btn-outline-primary mt-2" %></td>
           <td><%= link_to 'Destroy', checkout, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger mt-2" %></td>
         </tr>
       <% end %>

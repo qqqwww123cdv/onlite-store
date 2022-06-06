@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   post 'prom' => 'cards#prom'
   get "shops/about_us", to: "shops#about_us"
   get "shops/bonus", to: "shops#bonus"
-
+  get '/shops/categories/:id', to: 'admin/categories#show', as: 'cat'
   resources :shops, only:[:index, :show]
   resources :order_items
   resource :cards, only:[:show]

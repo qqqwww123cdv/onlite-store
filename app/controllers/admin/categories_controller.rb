@@ -6,6 +6,9 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
   def show
+    @product = Product.where(category_id: @category.id).all
+    @order_item = current_order.order_items.new
+
   end
 
   def new
