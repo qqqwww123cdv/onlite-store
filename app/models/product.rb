@@ -2,7 +2,7 @@ class Product < ApplicationRecord
   extend FriendlyId
   friendly_id :product_name, use: :slugged
   
-  has_many :order_items
+  has_many :order_items, dependent: :destroy
   has_one_attached :image
   belongs_to :category
   validates :category_id, presence: true
