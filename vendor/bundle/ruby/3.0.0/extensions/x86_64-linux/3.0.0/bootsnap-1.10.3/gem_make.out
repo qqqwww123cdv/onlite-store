@@ -1,0 +1,15 @@
+current directory: /home/silitski/diplom/vendor/bundle/ruby/3.0.0/gems/bootsnap-1.10.3/ext/bootsnap
+/home/silitski/.rbenv/versions/3.0.0/bin/ruby -I /home/silitski/.rbenv/versions/3.0.0/lib/ruby/3.0.0 -r ./siteconf20220607-5622-rjjhxb.rb extconf.rb
+creating Makefile
+
+current directory: /home/silitski/diplom/vendor/bundle/ruby/3.0.0/gems/bootsnap-1.10.3/ext/bootsnap
+make "DESTDIR=" clean
+
+current directory: /home/silitski/diplom/vendor/bundle/ruby/3.0.0/gems/bootsnap-1.10.3/ext/bootsnap
+make "DESTDIR="
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.so
+
+current directory: /home/silitski/diplom/vendor/bundle/ruby/3.0.0/gems/bootsnap-1.10.3/ext/bootsnap
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 bootsnap.so ./.gem.20220607-5622-zub8kp/bootsnap
