@@ -1,5 +1,6 @@
 class CheckoutsController < ApplicationController
   before_action :set_checkout, only: %i[ show update destroy ]
+  before_action :set_orders
 
   def index
     @checkouts = Checkout.paginate(page: params[:page], per_page: 10)
@@ -50,7 +51,11 @@ class CheckoutsController < ApplicationController
       @checkout = Checkout.find(params[:id])
     end
 
+    def set_orders
+      @orders = Order.all
+    end
+
     def checkout_params
-      params.require(:checkout).permit(:name, :email, :address, :pick_up, :user_id, :total_price)
+      params.require(:checkout).permit(:name, :email, :address, :pick_up, :user_id, :total_price, :order_id)
     end
 end

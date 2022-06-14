@@ -49,11 +49,14 @@
       </ul>
     <% end %>
     <span class=" my-2 my-lg-0">      
-      <% if user_signed_in? %>
-      <%= link_to "sign out", destroy_user_session_path, method: :delete %>
-    <% else %>
-      <%= link_to "sign in", new_user_session_path %>
-    <% end %>
+      <% if session[:order_id].nil? && user_signed_in?%>
+        <%= link_to "sign out", destroy_user_session_path, method: :delete %>
+      <% elsif !session[:order_id].nil? %>
+      Order has been created, place an order to sign out
+      <% else %>
+        <%= link_to "sign in", new_user_session_path %>
+      <% end %>
     </span>
   </div>
 </nav>
+

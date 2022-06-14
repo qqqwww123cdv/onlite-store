@@ -3,6 +3,7 @@ class Product < ApplicationRecord
   friendly_id :product_name, use: :slugged
   
   has_many :order_items, dependent: :destroy
+  has_many :orders, through: :order_items
   has_one_attached :image
   belongs_to :category
   validates :category_id, presence: true
@@ -13,6 +14,10 @@ class Product < ApplicationRecord
   validates :price, presence: true, length: {minimum: 1, maximum:7}
 
   validate :force_negative
+
+  def can_destr?
+    orders.size <= 0
+  end
 
   private
 

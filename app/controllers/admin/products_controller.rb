@@ -28,6 +28,7 @@ class Admin::ProductsController < Admin::BaseController
   end
 
   def edit
+    @cat_name = Product.find_by(category_id: @product.category_id).category
   end
 
   def create
@@ -58,11 +59,19 @@ class Admin::ProductsController < Admin::BaseController
   end
 
   def destroy
-    @product.destroy
-    
-    respond_to do |format|
-      format.html { redirect_to admin_products_path, notice: "Product was successfully destroyed." }
-      format.json { head :no_content }
+    if @product.can_destr?
+      @product.destroy
+      respond_to do |format|
+        format.html { redirect_to admin_products_path, notice: "Product was successfully destroyed." }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to admin_products_path }
+        format.json { head :no_content }
+        flash[:alert] = "You cannot delete this product, it is in the user's cart or order"
+
+      end
     end
   end
 
