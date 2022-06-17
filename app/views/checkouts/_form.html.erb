@@ -1,69 +1,69 @@
-   <%= form_with model: @checkout, :html => {:class => "form-group", :id => "user_signup_form"} do |form| %>
-      <% if @checkout.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@checkout.errors.count, "error") %> prohibited this checkout from being saved:</h2>
+<%= form_with model: @checkout, :html => {:class => "form-group", :id => "user_signup_form"} do |form| %>
+  <% if @checkout.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@checkout.errors.count, "error") %> prohibited this checkout from being saved:</h2>
 
-          <ul>
-            <% @checkout.errors.each do |error| %>
-              <li><%= error.full_message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
+      <ul>
+        <% @checkout.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-        <h3>Enter your details to place an order</h3>
-      <div class="field">
-        <%= form.label :email %>
-        <%= form.text_field :email, class: "form-control max" %>
-      </div>
-      <small class="text-muted">
-      Email can't be blank
-      </small>
+    <h3>Enter your details to place an order</h3>
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email, class: "form-control max" %>
+  </div>
+  <small class="text-muted">
+  Email can't be blank
+  </small>
 
-      <div class="field">
-        <%= form.label :name %>
-        <%= form.text_field :name, class: "form-control max", id: "name" %>
-      </div>
-      <small class="text-muted">
-      Name can't be blank and minimum is 1 character
-      </small>
-      </br></br>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control max", id: "name" %>
+  </div>
+  <small class="text-muted">
+  Name can't be blank and minimum is 1 character
+  </small>
+  </br></br>
 
-      <div id="radio">
-        <%= form.radio_button :pick_up, "self_pickup", id: "pick", checked: true%>Self-pickup
-        <%= form.radio_button :pick_up, "delivery", id: "delivery" %>  Delivery
-      </div>
-      
-      <div class="field" style="display:none" id="address">
-        <%= form.label :address %>
-        <%= form.text_field :address, class: "form-control max", id: "aaddress"%>
-        <small class="text-muted">
-        Must be at least 20 characters
-        </small>
-      </div>
-      
+  <div id="radio">
+    <%= form.radio_button :pick_up, "self_pickup", id: "pick", checked: true%>Self-pickup
+    <%= form.radio_button :pick_up, "delivery", id: "delivery" %>  Delivery
+  </div>
+  
+  <div class="field" style="display:none" id="address">
+    <%= form.label :address %>
+    <%= form.text_field :address, class: "form-control max", id: "aaddress"%>
+    <small class="text-muted">
+    Must be at least 20 characters
+    </small>
+  </div>
+  
 
-      <% if current_order.total_price != 0 %>
-        <div class="field">
-          <%= form.text_field :total_price, value: (current_order.total_price.to_f), type: :hidden %>
-        </div>
-      <% else %>
-        <div class="field">
-          <%= form.text_field :total_price, value: (current_order.subtotal.to_f), type: :hidden %>
-        </div>
-      <% end %> 
+  <% if current_order.total_price != 0 %>
+    <div class="field">
+      <%= form.text_field :total_price, value: (current_order.total_price.to_f), type: :hidden %>
+    </div>
+  <% else %>
+    <div class="field">
+      <%= form.text_field :total_price, value: (current_order.subtotal.to_f), type: :hidden %>
+    </div>
+  <% end %> 
 
-      <div class="field mb-3">
-        <%= form.number_field :order_id, id: :orders_id, value: current_order.id, type: :hidden  %>
-      </div>
+  <div class="field mb-3">
+    <%= form.number_field :order_id, id: :orders_id, value: current_order.id, type: :hidden  %>
+  </div>
 
-      <div class="field">
-        <%= form.number_field :user_id, id: :checkout_user_id, value: current_user.id, type: :hidden %>
-      </div>
+  <div class="field">
+    <%= form.number_field :user_id, id: :checkout_user_id, value: current_user.id, type: :hidden %>
+  </div>
 
-      <%= link_to "Back",  cards_path, class: "btn btn-outline-danger mt-2 mb-2" %>
+  <%= link_to "Back",  cards_path, class: "btn btn-outline-danger mt-2 mb-2" %>
 
-      <div class="actions">
-        <%= form.submit "Create checkout", class:"btn btn-success", id: "submit" %>
-      </div>
-    <% end %>
+  <div class="actions">
+    <%= form.submit "Create checkout", class:"btn btn-success", id: "submit" %>
+  </div>
+<% end %>
