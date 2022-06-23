@@ -1,5 +1,4 @@
 class Order < ApplicationRecord
-
   has_many :checkouts, dependent: :destroy
   has_many :order_items, dependent: :destroy
   has_many :products, through: :order_items
@@ -15,7 +14,6 @@ class Order < ApplicationRecord
     sub = (subtotal.to_f * promocode.discount.to_f) /100
     total_price = subtotal - sub
     update(total_price: total_price)
-    
   end
 
   private

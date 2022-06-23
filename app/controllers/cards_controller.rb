@@ -5,8 +5,7 @@ class CardsController < ApplicationController
 
   def prom
     @promocode = Promocode.where(code: params[:promocode]).first
-
-    if @promocode == nil
+    if @promocode.nil?
       redirect_to cards_show_path
       flash[:alert] = "Sorry, your promo code is incorrect or no longer valid."
     else
@@ -15,6 +14,5 @@ class CardsController < ApplicationController
       flash[:success] = "Your discount is #{@promocode.discount}%"
     end
   end 
-
 end
 

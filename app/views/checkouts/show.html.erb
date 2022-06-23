@@ -1,53 +1,65 @@
 <div class="container">
   <div class="marl">
-    <ul class="list-group mb-3"style="max-width: 640px;">
-      <li class="list-group-item">Number of order: <%= @checkout.id %></li>
-      <li class="list-group-item">Name: <%= @checkout.name %></li>
-      <li class="list-group-item">Email: <%= @checkout.email %></li>
-      <% if @checkout.address.empty? %>
-        <li class="list-group-item">Pick up:  pickup </li>
-      <% else %>
-        <li class="list-group-item">Pick up:  delivery </li>
-        <li class="list-group-item">Address:  <%= @checkout.address %></li>
-      <% end %>
-    </ul>
-    
     <% @order_items.each do |item| %>
-    <div class="card mb-5" style="max-width: 640px;">
-      <div class="row g-0">
-        <div class="col-md-5">
-          <% if item.product.image.attached? == false %>
-            <%= image_tag("plh.png", class: "img-fluid rounded-start dop") %>
-          <% else %>
-            <%= image_tag(item.product.image, class: "img-fluid rounded-start dop") %>
-          <% end %>
-        </div>
-        <div class="col-md-7">
-          <div class="card-body">
-            <h5 class="card-title"><%= item.product.product_name %></h5>
-            <p class="card-text">Code: <%= item.product.vendor_code %></p>
-            <p class="card-text">Total price per 1 product: <%= item.product.price %>$</p>
-            <p class="card-text">Quantity: <%= item.quantity %></p>
-            <h2>Subtotal: <%= item.total %>$</h2>
+      <% if item.product.nil? %>
+        <div class="container-fluid mt-100">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-body cart">
+                <% if current_user.admin? %>
+                  <h3><strong>This Order is Empty</strong></h3>
+                  <h4>The product(s) in this order have been deleted, this order has been reset</h4> 
+                <% else %>
+                  <h3><strong>Your Order is Empty</strong></h3>
+                  <h4>The product(s) in your order have been deleted, your order has been reset</h4> 
+                  <%= link_to "Continue shopping",  root_path, class: "btn btn-primary cart-btn-transform mt-2"%>                <% end %>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    <% end %>
-
-    <h1>Total price: <%= @checkout.total_price %>$</h1>
-
-    <% if current_user.user? %>
-      <%= link_to "Back",  root_path, class: "btn btn-outline-danger mt-2 mb-3" %>
-    <% else %>
-      <%= link_to "Back",  admin_path, class: "btn btn-outline-danger mt-2 mb-3" %>
+      <% else %>
+        <ul class="list-group mb-3"style="max-width: 640px;">
+          <li class="list-group-item">Number of order: <%= @checkout.id %></li>
+          <li class="list-group-item">Name: <%= @checkout.name %></li>
+          <li class="list-group-item">Email: <%= @checkout.email %></li>
+          <% if @checkout.address.empty? %>
+            <li class="list-group-item">Pick up:  pickup </li>
+          <% else %>
+            <li class="list-group-item">Pick up:  delivery </li>
+            <li class="list-group-item">Address:  <%= @checkout.address %></li>
+          <% end %>
+        </ul>
+        <div class="card mb-5" style="max-width: 640px;">
+          <div class="row g-0">
+            <div class="col-md-5">
+              <% if item.product.image.attached? == false %>
+                <%= image_tag("plh.png", class: "img-fluid rounded-start dop") %>
+              <% else %>
+                <%= image_tag(item.product.image, class: "img-fluid rounded-start dop") %>
+              <% end %>
+            </div>
+            <div class="col-md-7">
+              <div class="card-body">
+                <h5 class="card-title"><%= item.product.product_name %></h5>
+                <p class="card-text">Code: <%= item.product.vendor_code %></p>
+                <p class="card-text">Total price per 1 product: <%= item.product.price %>$</p>
+                <p class="card-text">Quantity: <%= item.quantity %></p>
+                <h2>Subtotal: <%= item.total %>$</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <% unless item.product.nil? %>
+        <h1>Total price: <%= @checkout.total_price %>$</h1>
+      <% end %>
+      <% if current_user.user? %>
+        <%= link_to "Back",  root_path, class: "btn btn-outline-danger mt-2 mb-3" %>
+      <% else %>
+        <%= link_to "Back",  admin_path, class: "btn btn-outline-danger mt-2 mb-3" %>
+      <% end %>
     <% end %>
   </div>
 </div>
-
-
-
-
-
-
-

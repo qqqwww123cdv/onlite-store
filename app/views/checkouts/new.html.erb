@@ -76,19 +76,19 @@
   })
 
   $( "#delivery" ).on( "click", function(){
-    submit.disabled = true;
+    submit.disabled = true
     if (aaddress.value.length > 20) {
-      submit.disabled = false;
+      submit.disabled = false
     }else {
     $( "#aaddress" ).change(function(){
       if (aaddress.value.length > 20) {
-        submit.disabled = false;
+        submit.disabled = false
       } else {
-        submit.disabled = true;
+        submit.disabled = true
       }
-    });
+    })
     }
-  });
+  })
 </script>
 
 

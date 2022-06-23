@@ -5,7 +5,6 @@ class Admin::ProductsController < Admin::BaseController
   
   def index
     @q = Product.ransack(params[:q])
-
     @products = @q.result(distinct: true).paginate(page: params[:page], per_page: 10)
     respond_to do |format|
       format.html
@@ -19,29 +18,23 @@ class Admin::ProductsController < Admin::BaseController
     flash[:success] = "Products imported!"
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @product = Product.new
     authorize @product
   end
 
-  def edit
-    @cat_name = Product.find_by(category_id: @product.category_id).category
-  end
+  def edit; end
 
   def create
     @product = Product.new(product_params)
     authorize @product
-    
     respond_to do |format|
       if @product.save
         format.html { redirect_to admin_products_path, notice: "Product was successfully created." }
-        format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -50,10 +43,8 @@ class Admin::ProductsController < Admin::BaseController
     respond_to do |format|
       if @product.update(product_params)
         format.html { redirect_to admin_product_path, notice: "Product was successfully updated." }
-        format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -63,14 +54,11 @@ class Admin::ProductsController < Admin::BaseController
       @product.destroy
       respond_to do |format|
         format.html { redirect_to admin_products_path, notice: "Product was successfully destroyed." }
-        format.json { head :no_content }
       end
     else
       respond_to do |format|
         format.html { redirect_to admin_products_path }
-        format.json { head :no_content }
         flash[:alert] = "You cannot delete this product, it is in the user's cart or order"
-
       end
     end
   end
@@ -91,16 +79,16 @@ class Admin::ProductsController < Admin::BaseController
   end
 
   private
+  
+  def set_product
+    @product = Product.friendly.find(params[:id])
+  end
 
-    def set_product
-      @product = Product.friendly.find(params[:id])
-    end
+  def set_categories
+    @categories = Category.all
+  end
 
-    def set_categories
-      @categories = Category.all
-    end
-
-    def product_params
-      params.require(:product).permit(:product_name, :image, :vendor_code, :price, :description, :category_id)
-    end
+  def product_params
+    params.require(:product).permit(:product_name, :image, :vendor_code, :price, :description, :category_id)
+  end
 end

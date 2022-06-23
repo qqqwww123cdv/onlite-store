@@ -7,7 +7,7 @@ class OrderItemsController < ApplicationController
     session[:order_id] = @order.id
     redirect_to root_path, notice: "#{@order_item.product.product_name} was successfully added to the cart!"
     @order_item.product.product_name
-    Order.last.update(total_price: 0)
+    Order.update(total_price: 0)
   end
 
   def update
@@ -15,13 +15,13 @@ class OrderItemsController < ApplicationController
     @order_item.update(order_params)
     flash[:success] = "You successfully update the Position!"
     @order_items = current_order.order_items
-    Order.last.update(total_price: 0)
-end
+    Order.update(total_price: 0)
+  end
 
   def destroy
     @order_item = @order.order_items.find(params[:id])
     @order_item.destroy
-    Order.last.update(total_price: 0)
+    Order.update(total_price: 0)
     @order_items = current_order.order_items
     redirect_to root_path, notice: "#{@order_item.product.product_name} was successfully destroyed."
   end

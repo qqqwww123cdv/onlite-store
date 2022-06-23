@@ -1,7 +1,6 @@
 class Product < ApplicationRecord
   extend FriendlyId
   friendly_id :product_name, use: :slugged
-  
   has_many :order_items, dependent: :destroy
   has_many :orders, through: :order_items
   has_one_attached :image
@@ -11,23 +10,13 @@ class Product < ApplicationRecord
   validates :product_name, presence: true, length: {minimum: 2, maximum: 500}
   validates :vendor_code, presence: true, length: {minimum: 7, maximum: 7}
   validates :description, length: {minimum: 0, maximum: 5000}
-  validates :price, presence: true, length: {minimum: 1, maximum:7}
-
-  validate :force_negative
+  validates :price, presence: true, length: {maximum:7}, :numericality => { :greater_than_or_equal_to => 1 }
 
   def can_destr?
     orders.size <= 0
   end
 
   private
-
-  def force_negative
-    unless price.blank?
-      if price < 1
-        errors.add(:price, "Must be greater than 0")
-      end
-    end
-  end
 
   def self.to_csv
     CSV.generate do |csv|

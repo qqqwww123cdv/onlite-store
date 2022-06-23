@@ -1,17 +1,15 @@
 class ShopsController < ApplicationController
+  before_action :set_order_item
 
   def index
-    @categories = Category.all
     @q = Product.ransack(params[:q])
     @products = @q.result(distinct: true).paginate(page: params[:page], per_page: 10)
-    @order_item = current_order.order_items.new
     if user_signed_in? && current_user.admin?
       redirect_to admin_path
     end
   end
 
   def show
-    @order_item = current_order.order_items.new
     @product = Product.friendly.find(params[:id])
   end
 
@@ -20,14 +18,18 @@ class ShopsController < ApplicationController
   end
 
   def categories
-    @cat = Category.all
+    @q = Category.ransack(params[:q])
+    @cat = @q.result(distinct: true)
     @product = Product.all
-    @order_item = current_order.order_items.new
   end
 
-  def about_us
-  end
+  def about_us; end
   
-  def bonus
+  def bonus; end
+
+  private
+
+  def set_order_item
+    @order_item = current_order.order_items.new
   end
 end

@@ -3,7 +3,6 @@ class OrderItem < ApplicationRecord
   belongs_to :product
   belongs_to :user
 
-
   before_save :set_unit_price
   before_save :set_total
 

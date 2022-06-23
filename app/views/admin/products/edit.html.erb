@@ -40,7 +40,7 @@
 
     <div class="field mb-3">
       <%= form.label :category %>
-      <%= form.select :category_id, options_for_select(@categories.collect {|cat| [cat.name, cat.id]}.insert(0, @cat_name.name )), class: "form-control max" %>
+      <%= form.collection_select :category_id, Category.order(:name), :id, :name, {:prompt => 'Select category'} %>
     </div>
 
     <div class="custom-file file_max-width">
